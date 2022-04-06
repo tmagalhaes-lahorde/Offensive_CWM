@@ -62,7 +62,6 @@ public class PlayerScript : MonoBehaviour
 
         if (!charactercontroller.isGrounded)
         {
-            Debug.Log("outground");
             Deplacements.y -= gravity * Time.deltaTime;
         }
         charactercontroller.Move(Deplacements * Time.deltaTime); //permet un déplacement lisse sans acoups

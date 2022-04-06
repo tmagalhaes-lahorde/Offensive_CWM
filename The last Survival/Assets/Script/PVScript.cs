@@ -10,6 +10,9 @@ public class PVScript : MonoBehaviour
     public float CurrentHealth = 100.0f;
     public float Maxhealth = 100.0f;
 
+    public bool inStorm;
+    private float timer = 1f;
+
     public Image HealthBarImage;
     public TextMeshProUGUI healthText;
     public Image color;
@@ -39,6 +42,16 @@ public class PVScript : MonoBehaviour
         {
             CurrentHealth = 100;
         }
+
+        if(inStorm == true)
+        {
+            timer -= Time.deltaTime;
+            if(timer <= 0)
+            {
+                DamageButton(1);
+                timer = 1;
+            }
+        }
     }
 
     public void DamageButton(int damage)
@@ -48,5 +61,10 @@ public class PVScript : MonoBehaviour
     public void HealthButton(int Health)
     {
         CurrentHealth += Health;
+    }
+
+    void stopStormDamage()
+    {
+        inStorm = false;
     }
 }
