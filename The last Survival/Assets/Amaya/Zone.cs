@@ -44,7 +44,6 @@ public class Zone : MonoBehaviour
         insideWalls.position = transform.position;
         outsideWalls.position = transform.position;
 
-        Debug.Log(timerNextZone);
 
         if (stormActive == false)
         {   
@@ -60,7 +59,6 @@ public class Zone : MonoBehaviour
 
                 if (timerNextZone <= 0)
                 {
-                    Debug.Log("coucou");
                     stormActive = true;
                 }
             }

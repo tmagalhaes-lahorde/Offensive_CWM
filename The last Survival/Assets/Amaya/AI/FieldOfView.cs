@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using BehaviourTree;
 
@@ -15,6 +16,25 @@ public class FieldOfView : Nodes
 
     public override NodesState Evaluate()
     {
-        return base.Evaluate();
+        object t = GetData("target");
+        if (t == null)
+        {
+            Collider[] colliders = Physics.OverlapSphere(
+                _transform.position, EnemiesBT.fovRange , 8);
+
+            colliders.OrderBy(hit => Vector3.Distance(hit.transform.position, _transform.position));
+            Debug.Log(colliders.Length);
+
+            if (colliders.Length > 0)
+            {
+                Parents.Parents.SetData("target", colliders[0].transform);
+                state = NodesState.SUCCESS;
+                return state;
+            }
+            state = NodesState.FAILURE;
+            return state;
+        }
+        state = NodesState.SUCCESS;
+        return state;
     }
 }

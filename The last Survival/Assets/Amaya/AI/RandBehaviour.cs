@@ -5,25 +5,23 @@ using BehaviourTree;
 
 public class RandBehaviour : Nodes
 {
-    private Transform _transform;
-    private Animator _animator;
     private int statement;
-    public RandBehaviour(Transform transform, Animator animator)
+    public RandBehaviour()
     {
-        _transform = transform;
-        _animator = animator;
     }
 
     public override NodesState Evaluate()
     {
         statement = Random.Range(0, 2);
-
+        Debug.Log(statement);
         switch(statement)
         {
             case 0:
                 return NodesState.SUCCESS;//attaque
             case 1:
                 return NodesState.FAILURE; //fuite
+            default:
+                break;
         }
         return NodesState.FAILURE;
     }

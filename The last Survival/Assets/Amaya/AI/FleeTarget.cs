@@ -15,6 +15,7 @@ public class FleeTarget : Nodes
 
     public override NodesState Evaluate()
     {
-        return base.Evaluate();
+        Debug.Log("better flee");
+        return NodesState.SUCCESS;
     }
 }
