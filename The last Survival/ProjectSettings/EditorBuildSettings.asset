@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: de3bea687131dad48811c8de458c5f3e
+  - enabled: 1
+    path: Assets/Scenes/Battle Island.unity
+    guid: 810d6649206324a4cbfb0d8f1f4867bc
   m_configObjects: {}
