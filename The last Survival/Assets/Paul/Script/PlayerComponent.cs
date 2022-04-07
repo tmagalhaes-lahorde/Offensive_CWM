@@ -16,7 +16,7 @@ public class PlayerComponent : MonoBehaviour
     public float walkingSpeed = 7.5f;
 
     //Initialise ma valeur de course
-    public float runningSpeed = 15.0f;
+    public float runningSpeed = 150.0f;
 
     //Initialiser ma valeur de saut
     public float jumpSpeed = 8.0f;
