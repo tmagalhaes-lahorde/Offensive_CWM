@@ -21,7 +21,6 @@ public class ShooterScript : MonoBehaviour
 
         if(Physics.Raycast(Cam.transform.position,Cam.transform.forward,out hit, range,7))
         {
-            Debug.Log(hit.transform.gameObject.name) ;
         }
     }
 }
