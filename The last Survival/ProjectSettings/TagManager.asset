@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Ennemies
   - User
   layers:
   - Default
@@ -16,7 +17,7 @@ TagManager:
   - Environnement
   - Ennemi
   - 
-  - Wall
+  - 
   - 
   - 
   - 
