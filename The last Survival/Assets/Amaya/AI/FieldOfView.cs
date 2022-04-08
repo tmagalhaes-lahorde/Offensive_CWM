@@ -15,45 +15,33 @@ public class FieldOfView : Nodes
         _transform = transform;
         _animator = animator;
         users = GameObject.FindGameObjectsWithTag("User");
+
     }
     public override NodesState Evaluate()
     {
-        //object t = GetData("target");
-        //if (t == null)
-        //{
-        //    Collider[] colliders = Physics.OverlapSphere(
-        //        _transform.position, EnemiesBT.fovRange, _enemyLayerMask);
+        List<GameObject> ennemis = new List<GameObject>();
 
-        //    //colliders.OrderBy(hit => Vector3.Distance(hit.transform.position, _transform.position));
+        for(int i = 0; i < users.Length; i++)
+        {
+            ennemis.Add(users[i].gameObject);
+        }
 
-        //    if (colliders.Length > 0)
-        //    {
-        //        Parents.Parents.SetData("target", colliders[0].transform);
-        //        state = NodesState.SUCCESS;
-        //        return state;
-        //    }
-        //    state = NodesState.FAILURE;
-        //    return state;
-        //}
-        //state = NodesState.SUCCESS;
-        //return state;
-
-        foreach(GameObject user in users)
+        foreach (GameObject user in ennemis)
         {
             if (user != _transform.gameObject)
             {
-                if (Vector3.Distance(user.transform.position, _transform.position) < 5)
+                if (Vector3.Distance(user.transform.position, _transform.position) < 10)
                 {
                     Vector3 dir = user.transform.position - _transform.position;
                     float angle = Vector3.Angle(dir, _transform.forward);
 
                     if (angle < 60)
                     {
-                        Debug.Log("coucou");
+                        _transform.LookAt(user.transform.position);
+                        return NodesState.SUCCESS;
                     }
                 }
             }
-            
         }
         return NodesState.FAILURE;
     }

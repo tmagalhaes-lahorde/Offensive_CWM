@@ -13,7 +13,6 @@ public class RandBehaviour : Nodes
     public override NodesState Evaluate()
     {
         statement = Random.Range(0, 2);
-        Debug.Log(statement);
         switch(statement)
         {
             case 0:
