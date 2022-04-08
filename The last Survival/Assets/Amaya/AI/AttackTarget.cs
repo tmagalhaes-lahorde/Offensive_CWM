@@ -34,6 +34,9 @@ public class AttackTarget : Nodes
                 {
                     nbAmmo -= 1;
                     Debug.Log("LESSSGOOOOOOOOOOOOO");
+                    _animator.SetBool("Shoot", true);
+                    _animator.SetBool("Walk", false);
+                    _animator.SetBool("Run", false);
                     //add damage to user ennemi !
 
                     if (nbAmmo <= 0)
