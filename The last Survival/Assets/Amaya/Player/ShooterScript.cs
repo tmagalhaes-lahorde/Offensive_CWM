@@ -6,12 +6,14 @@ public class ShooterScript : MonoBehaviour
 {
     public Camera Cam;
     private float range = 100f, damage = 10;
-
+    public AmmowScript count;
+   
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
             Shoot();
+            count.Currentammow -= 1;
         }
     }
 
