@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Credit.unity
     guid: 4b4bd318776a83b4d839670df31c88cb
   - enabled: 0
-    path: Assets/Scenes/Game.unity
+    path: Assets/Paul/STS_FreeMedievalHouse/Scene/Demo1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
     path: Assets/Scenes/Lose.unity

@@ -8,33 +8,53 @@ public class FieldOfView : Nodes
 {
     private Transform _transform;
     private Animator _animator;
+    private static LayerMask _enemyLayerMask = 1 << 8;
+    GameObject[] users;
     public FieldOfView(Transform transform, Animator animator)
     {
         _transform = transform;
         _animator = animator;
+        users = GameObject.FindGameObjectsWithTag("User");
     }
-
     public override NodesState Evaluate()
     {
-        object t = GetData("target");
-        if (t == null)
+        //object t = GetData("target");
+        //if (t == null)
+        //{
+        //    Collider[] colliders = Physics.OverlapSphere(
+        //        _transform.position, EnemiesBT.fovRange, _enemyLayerMask);
+
+        //    //colliders.OrderBy(hit => Vector3.Distance(hit.transform.position, _transform.position));
+
+        //    if (colliders.Length > 0)
+        //    {
+        //        Parents.Parents.SetData("target", colliders[0].transform);
+        //        state = NodesState.SUCCESS;
+        //        return state;
+        //    }
+        //    state = NodesState.FAILURE;
+        //    return state;
+        //}
+        //state = NodesState.SUCCESS;
+        //return state;
+
+        foreach(GameObject user in users)
         {
-            Collider[] colliders = Physics.OverlapSphere(
-                _transform.position, EnemiesBT.fovRange , 8);
-
-            colliders.OrderBy(hit => Vector3.Distance(hit.transform.position, _transform.position));
-            Debug.Log(colliders.Length);
-
-            if (colliders.Length > 0)
+            if (user != _transform.gameObject)
             {
-                Parents.Parents.SetData("target", colliders[0].transform);
-                state = NodesState.SUCCESS;
-                return state;
+                if (Vector3.Distance(user.transform.position, _transform.position) < 5)
+                {
+                    Vector3 dir = user.transform.position - _transform.position;
+                    float angle = Vector3.Angle(dir, _transform.forward);
+
+                    if (angle < 60)
+                    {
+                        Debug.Log("coucou");
+                    }
+                }
             }
-            state = NodesState.FAILURE;
-            return state;
+            
         }
-        state = NodesState.SUCCESS;
-        return state;
+        return NodesState.FAILURE;
     }
 }

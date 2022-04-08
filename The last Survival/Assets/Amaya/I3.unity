@@ -135,28 +135,14 @@ GameObject:
   - component: {fileID: 235177355}
   - component: {fileID: 235177354}
   - component: {fileID: 235177353}
-  - component: {fileID: 235177351}
+  - component: {fileID: 235177357}
   m_Layer: 0
   m_Name: IA
-  m_TagString: Untagged
+  m_TagString: User
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &235177351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235177350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ec5d0a31230e478074e5adef005cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  User: {fileID: 235177356}
-  Animator: {fileID: 0}
 --- !u!65 &235177353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -235,6 +221,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &235177357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235177350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871ec5d0a31230e478074e5adef005cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  User: {fileID: 235177356}
+  Animator: {fileID: 0}
 --- !u!1 &273990709
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +475,8 @@ GameObject:
   - component: {fileID: 379472292}
   - component: {fileID: 379472291}
   - component: {fileID: 379472290}
+  - component: {fileID: 379472293}
+  - component: {fileID: 379472294}
   m_Layer: 0
   m_Name: Cylinder (2)
   m_TagString: User
@@ -490,7 +492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379472288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -94.3, y: 0, z: 27.4}
+  m_LocalPosition: {x: -120.06, y: 1.51, z: 21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -561,6 +563,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379472288}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &379472293
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379472288}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &379472294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379472288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871ec5d0a31230e478074e5adef005cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  User: {fileID: 2006868301}
+  Animator: {fileID: 0}
 --- !u!1 &599187475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,9 +1380,8 @@ GameObject:
   - component: {fileID: 2006868304}
   - component: {fileID: 2006868303}
   - component: {fileID: 2006868302}
-  - component: {fileID: 2006868306}
   - component: {fileID: 2006868305}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: User
   m_Icon: {fileID: 0}
@@ -1365,7 +1396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006868300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -124, y: 4.75, z: -2.81}
+  m_LocalPosition: {x: -124, y: 2, z: -5.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1447,24 +1478,11 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2006868306
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006868300}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &2076659377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,6 +1495,7 @@ GameObject:
   - component: {fileID: 2076659381}
   - component: {fileID: 2076659380}
   - component: {fileID: 2076659379}
+  - component: {fileID: 2076659382}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: User
@@ -1492,7 +1511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076659377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64.9, y: 0, z: 0}
+  m_LocalPosition: {x: -134.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1563,3 +1582,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076659377}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &2076659382
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076659377}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
