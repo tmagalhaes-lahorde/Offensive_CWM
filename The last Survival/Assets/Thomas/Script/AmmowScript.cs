@@ -7,7 +7,7 @@ using TMPro;
 public class AmmowScript : MonoBehaviour
 {
 
-    public int Currentammow = 50;
+    public int Currentammow = 200;
     public int Maxammow = 200;
 
     public TextMeshProUGUI text;
@@ -24,6 +24,11 @@ public class AmmowScript : MonoBehaviour
         if (Currentammow >= 200)
         {
             Currentammow = 200;
+        }
+
+        if (Currentammow <= 0)
+        {
+            Currentammow = 0;
         }
     }
 

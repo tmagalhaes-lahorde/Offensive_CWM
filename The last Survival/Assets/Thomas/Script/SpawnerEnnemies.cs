@@ -16,15 +16,15 @@ public class SpawnerEnnemies : MonoBehaviour
 
     IEnumerator EnnemyDrop()
     {
-        while(EnnemiesCount < 99)
+        while(EnnemiesCount < 98)
         {
             Xpos = Random.Range(-499, 499);
-            Zpos = Random.Range(-499, 499);
+            Zpos = Random.Range(-473, 473);
             Instantiate(ennemy, new Vector3(Xpos, 100, Zpos), Quaternion.identity);
             yield return new WaitForSeconds(0f);
             EnnemiesCount += 1;
 
-            if (EnnemiesCount >= 99)
+            if (EnnemiesCount >= 98)
             {
                 break;
             }
