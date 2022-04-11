@@ -7,8 +7,10 @@ using BehaviourTree;
 public class EnemiesBT : TreeBuild
 {
     public Transform User;
+    public NavMeshAgent WayPointFollow;
     public Animator Animator;
     public NavMeshAgent Agent;
+    public Zone Zone;
     public static float fovRange = 20f;
     public static int NbAmmo = 50;
 
@@ -16,12 +18,12 @@ public class EnemiesBT : TreeBuild
     {
         Nodes root = new Selector(new List<Nodes>
         {
-            //new GoToZone(User,Animator),
-            //new Sequence(new List<Nodes>
-            //{
-                //new Explore(User,Animator),
-               // new Selector(new List<Nodes>
-               //{
+            new GoToZone(User,Animator),
+            new Sequence(new List<Nodes>
+            {
+                new Explore(User,Animator,Agent,WayPointFollow),
+                new Selector(new List<Nodes>
+                {
                     new Sequence(new List<Nodes>
                     {
                         new FieldOfView(User,Animator),
@@ -34,9 +36,9 @@ public class EnemiesBT : TreeBuild
                             }),
                             new FleeTarget(User,Animator,Agent),
                         }),
-                    //}),
-                   // new SearchItems(User,Animator),
-                //}),
+                    }),
+                    new SearchItems(User,Animator),
+                }),
             }),
 
         }) ;
