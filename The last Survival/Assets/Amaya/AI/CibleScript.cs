@@ -5,14 +5,21 @@ using UnityEngine;
 public class CibleScript : MonoBehaviour
 {
     public int nbHealth = 100;
+
     void Update()
     {
+        Debug.Log(nbHealth);
 
         if(nbHealth <= 0)
         {
             this.gameObject.SetActive(false);
             nbHealth = 0;
         }
+    }
+
+    public void Hit(int dmg)
+    {
+        nbHealth -= dmg;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,10 +29,5 @@ public class CibleScript : MonoBehaviour
             nbHealth = 100;
             GameObject.Destroy(other.gameObject);
         }
-    }
-
-    public void Hit(int dmg)
-    {
-        nbHealth -= dmg;
     }
 }
