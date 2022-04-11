@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CibleScript : MonoBehaviour
 {
-    private int nbHealth = 100;
+    public int nbHealth = 100;
+
     void Update()
     {
         Debug.Log(nbHealth);
@@ -19,5 +20,14 @@ public class CibleScript : MonoBehaviour
     public void Hit(int dmg)
     {
         nbHealth -= dmg;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("soin") && nbHealth <= 100)
+        {
+            nbHealth = 100;
+            GameObject.Destroy(other.gameObject);
+        }
     }
 }

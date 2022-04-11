@@ -68,7 +68,6 @@ public class PVScript : MonoBehaviour
         }
     }
 
-
 public void DamageButton(int damage)
     {
         CurrentHealth -= damage;
