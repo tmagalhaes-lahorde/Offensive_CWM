@@ -30,6 +30,7 @@ public class FieldOfView : Nodes
         {
             if (user != _transform.gameObject)
             {
+                if(user.activeSelf == true)
                 if (Vector3.Distance(user.transform.position, _transform.position) < 10)
                 {
                     Vector3 dir = user.transform.position - _transform.position;
