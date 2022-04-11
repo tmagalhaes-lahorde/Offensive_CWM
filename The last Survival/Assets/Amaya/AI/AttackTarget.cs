@@ -8,8 +8,8 @@ public class AttackTarget : Nodes
     private Transform _transform;
     private Animator _animator;
     private GameObject[] users;
-    private int nbAmmo = 20;
-    private int nbHealth = 100;
+    private int nbAmmo;
+    private int nbHealth;
     private float timer = 0.1f;
 
     private int nbShot = 0;
@@ -18,6 +18,8 @@ public class AttackTarget : Nodes
         _transform = transform;
         _animator = animator;
         users = GameObject.FindGameObjectsWithTag("User");
+        nbAmmo = EnemiesBT.NbAmmo;
+        nbHealth = EnemiesBT.NbHealth;
     }
 
     public override NodesState Evaluate()
@@ -27,34 +29,40 @@ public class AttackTarget : Nodes
             if (user.gameObject != _transform.gameObject)
             {
                 Vector3 dir = user.transform.position - _transform.position;
-                float angle = Vector3.Angle(dir, _transform.forward);
-
-                timer -= Time.deltaTime;
-                if(timer <= 0)
+                if(Physics.Raycast(_transform.position,dir, out RaycastHit hit))
                 {
-                    nbAmmo -= 1;
-                    Debug.Log("LESSSGOOOOOOOOOOOOO");
-                    _animator.SetBool("Shoot", true);
-                    _animator.SetBool("Walk", false);
-                    _animator.SetBool("Run", false);
-                    //add damage to user ennemi !
+                    CibleScript cible = hit.collider.GetComponent<CibleScript>();
+                    PVScript playerHealth = hit.collider.GetComponent<PVScript>();
 
-                    if (nbAmmo <= 0)
+                    timer -= Time.deltaTime;
+                    if (timer <= 0)
                     {
-                        nbAmmo = 0;
-                        return NodesState.FAILURE;
-                    }
+                        nbAmmo -= 1;
+                        Debug.Log(nbAmmo);
 
-                    if (nbHealth <= nbHealth / 2)
-                    {
-                        if(nbHealth <= 0)
+                        //---ANIMATIONS---//
+                        _animator.SetBool("Shoot", true);
+                        _animator.SetBool("Walk", false);
+                        _animator.SetBool("Run", false);
+
+                        //---PLUS-DE-MUNITIONS---//
+                        if (nbAmmo <= 0)
                         {
-                            nbHealth = 0;
-                            _transform.gameObject.SetActive(false);
+                            nbAmmo = 0;
+                            return NodesState.FAILURE;
                         }
-                        return NodesState.FAILURE;
+
+                        if(cible != null)
+                        {
+                            cible.Hit(10);
+                        }
+
+                        if(playerHealth != null)
+                        {
+                            playerHealth.DamageButton(10);
+                        }
+                        timer = 0.1f;
                     }
-                    timer = 0.1f;
                 }
                 return NodesState.RUNNING;
             }

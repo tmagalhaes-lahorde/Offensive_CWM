@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Zone : MonoBehaviour
 {
     public RawImage inStormEffect;
+    public Image zoneSign;
     private CapsuleCollider zone;
     public Transform insideWalls;
     public Transform outsideWalls;
