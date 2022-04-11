@@ -61,11 +61,9 @@ public class PVScript : MonoBehaviour
 
         if(outZone == false)
         {
-            inStormEffect.enabled = false;
         }
         else if(outZone == true)
         {
-            inStormEffect.enabled = true;
             timerInZone -= Time.deltaTime;
 
             if(timerInZone <= 0)
