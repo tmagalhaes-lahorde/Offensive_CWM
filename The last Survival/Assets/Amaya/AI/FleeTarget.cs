@@ -25,7 +25,8 @@ public class FleeTarget : Nodes
             Vector3 dir = _transform.position - user.transform.position;
             Vector3 NextPos = _transform.position + dir * 2;
             _agent.SetDestination(NextPos);
+            return NodesState.SUCCESS;
         }
-        return NodesState.SUCCESS;
+        return NodesState.FAILURE;
     }
 }

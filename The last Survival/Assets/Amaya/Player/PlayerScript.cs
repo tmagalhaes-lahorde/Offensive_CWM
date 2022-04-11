@@ -9,11 +9,13 @@ public class PlayerScript : MonoBehaviour
     public CharacterController charactercontroller;
 
     private Vector3 Deplacements;
+    private Zone inZone;
+    private PVScript Health;
 
     public bool Grounded;
     private bool Running = false;
 
-    public float LimitRotation = 30.0f,sensivity = 10.0f, angle, rotationx = 0,Health = 100;
+    public float LimitRotation = 30.0f, sensivity = 10.0f, angle, rotationx = 0;
 
     private float maxHealth = 100,runningSpeed = 30f, walkingSpeed = 15f,gravity = 9, jumpForce =5;
 
@@ -64,7 +66,7 @@ public class PlayerScript : MonoBehaviour
         {
             Deplacements.y -= gravity * Time.deltaTime;
         }
-        charactercontroller.Move(Deplacements * Time.deltaTime); //permet un déplacement lisse sans acoups
+        charactercontroller.Move(Deplacements * Time.deltaTime);
 
 
         //------------------ROTATION JOUEUR ENTIER------------------------//
@@ -76,16 +78,9 @@ public class PlayerScript : MonoBehaviour
         HeadPlayer.transform.localRotation = Quaternion.Euler(rotationx, 0, 0);
 
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensivity, 0);
+
+        
     }
 
-    public void Hit(float dmg)
-    {
-        Health -= dmg;
-
-        if (Health <= 0)
-        {
-            Destroy(this.gameObject);
-        }
-    }
 }
 

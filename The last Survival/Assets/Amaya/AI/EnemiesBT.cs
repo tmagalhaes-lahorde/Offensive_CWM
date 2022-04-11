@@ -10,7 +10,7 @@ public class EnemiesBT : TreeBuild
     public Animator Animator;
     public NavMeshAgent Agent;
     public static float fovRange = 20f;
-    public static int NbAmmo = 50, NbHealth = 100;
+    public static int NbAmmo = 50;
 
     protected override Nodes SetupTree()
     {
