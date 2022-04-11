@@ -30,7 +30,6 @@ public class AttackTarget : Nodes
                 Vector3 dir = user.transform.position - _transform.position;
                 Vector3 lastDir = (dir + randDir) /2;
 
-                Debug.DrawRay(_transform.position, lastDir,Color.green);
                 if (Physics.Raycast(_transform.position,lastDir, out RaycastHit hit,10))
                 {
                     CibleScript cible = hit.collider.GetComponent<CibleScript>();

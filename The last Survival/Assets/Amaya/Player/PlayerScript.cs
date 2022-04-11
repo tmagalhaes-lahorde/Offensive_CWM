@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
 {
     public Camera HeadPlayer;
     public CharacterController charactercontroller;
+    public LineRenderer goToZone;
 
     private Vector3 Deplacements;
     private Zone inZone;
@@ -79,7 +80,8 @@ public class PlayerScript : MonoBehaviour
 
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensivity, 0);
 
-        
+        //---ALLER-A-LA-ZONE---//
+
     }
 
 }
