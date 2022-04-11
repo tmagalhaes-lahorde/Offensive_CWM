@@ -29,7 +29,7 @@ public class EnemiesBT : TreeBuild
                         {
                             new Sequence (new List<Nodes>
                             {
-                                new RandBehaviour(),
+                                new RandBehaviour(User),
                                 new AttackTarget(User,Animator),
                             }),
                             new FleeTarget(User,Animator,Agent),
