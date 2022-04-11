@@ -2,30 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CibleScript : MonoBehaviour
+public class AmmoScript : MonoBehaviour
 {
-    public int nbHealth = 100;
+    public int nbAmmo = 100;
     void Update()
     {
-
-        if(nbHealth <= 0)
+        if (nbAmmo <= 0)
         {
             this.gameObject.SetActive(false);
-            nbHealth = 0;
+            nbAmmo = 0;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("soin") && nbHealth <= 100)
+        if (other.CompareTag("Ammow") && nbAmmo <= 200)
         {
-            nbHealth = 100;
+            nbAmmo = 200;
             GameObject.Destroy(other.gameObject);
         }
-    }
-
-    public void Hit(int dmg)
-    {
-        nbHealth -= dmg;
     }
 }

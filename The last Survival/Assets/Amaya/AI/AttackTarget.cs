@@ -6,6 +6,7 @@ using BehaviourTree;
 public class AttackTarget : Nodes
 {
     private Transform _transform;
+    private Camera _camera;
     private Animator _animator;
     private GameObject[] users;
     private int nbAmmo;
@@ -18,18 +19,21 @@ public class AttackTarget : Nodes
         _transform = transform;
         _animator = animator;
         users = GameObject.FindGameObjectsWithTag("User");
-        nbAmmo = EnemiesBT.NbAmmo;
-        nbHealth = EnemiesBT.NbHealth;
+
     }
 
     public override NodesState Evaluate()
     {
         foreach(GameObject user in users)
         {
+            nbAmmo =  _transform.GetComponent<AmmoScript>().nbAmmo;
             if (user.gameObject != _transform.gameObject)
             {
+                Vector3 randDir = Random.insideUnitSphere * 2;
                 Vector3 dir = user.transform.position - _transform.position;
-                if(Physics.Raycast(_transform.position,dir, out RaycastHit hit))
+                Vector3 lastDir = dir + randDir;
+
+                if (Physics.Raycast(_transform.position,lastDir, out RaycastHit hit))
                 {
                     CibleScript cible = hit.collider.GetComponent<CibleScript>();
                     PVScript playerHealth = hit.collider.GetComponent<PVScript>();
@@ -37,7 +41,6 @@ public class AttackTarget : Nodes
                     timer -= Time.deltaTime;
                     if (timer <= 0)
                     {
-                        nbAmmo -= 1;
                         Debug.Log(nbAmmo);
 
                         //---ANIMATIONS---//
