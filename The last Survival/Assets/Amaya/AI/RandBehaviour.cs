@@ -5,25 +5,32 @@ using BehaviourTree;
 
 public class RandBehaviour : Nodes
 {
-    private Transform _transform;
-    private Animator _animator;
     private int statement;
-    public RandBehaviour(Transform transform, Animator animator)
+    private Transform _transform;
+    private GameObject[] users;
+    public RandBehaviour(Transform transform)
     {
         _transform = transform;
-        _animator = animator;
+        users = GameObject.FindGameObjectsWithTag("User");
     }
 
     public override NodesState Evaluate()
     {
-        statement = Random.Range(0, 2);
-
-        switch(statement)
+        foreach(GameObject user in users)
         {
-            case 0:
-                return NodesState.SUCCESS;//attaque
-            case 1:
-                return NodesState.FAILURE; //fuite
+            if(user != _transform.gameObject)
+            {
+                statement = Random.Range(0, 2);
+                switch (statement)
+                {
+                    case 0:
+                        return NodesState.SUCCESS;//attaque
+                    case 1:
+                        return NodesState.FAILURE; //fuite
+                    default:
+                        break;
+                }
+            }
         }
         return NodesState.FAILURE;
     }
