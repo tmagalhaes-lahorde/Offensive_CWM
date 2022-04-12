@@ -27,13 +27,11 @@ public class Explore : Nodes
             int x = Random.Range(-50, 50);
             int z = Random.Range(-50, 50);
 
-            _wayPointFollow.SetDestination(new Vector3(x + _wayPointFollow.transform.position.x, 1, z + _wayPointFollow.transform.position.z));
-
+            _wayPointFollow.SetDestination(new Vector3(x + _wayPointFollow.transform.position.x, _wayPointFollow.transform.position.y, z + _wayPointFollow.transform.position.z));
             _agent.SetDestination(_wayPointFollow.transform.position);
-
             timerNextPos = 2f;
         }
-
+        
         return NodesState.RUNNING;
     }
 }

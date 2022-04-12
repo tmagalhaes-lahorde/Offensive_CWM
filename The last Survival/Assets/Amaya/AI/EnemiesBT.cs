@@ -34,7 +34,7 @@ public class EnemiesBT : TreeBuild
                                 new RandBehaviour(User),
                                 new AttackTarget(User,Animator),
                             }),
-                            new FleeTarget(User,Animator,Agent),
+                            //new FleeTarget(User,Animator,Agent),
                         }),
                     }),
                     new SearchItems(User,Animator),

@@ -13,16 +13,17 @@ public class PlayerScript : MonoBehaviour
     private Zone inZone;
     private PVScript Health;
 
-    public bool Grounded;
-    private bool Running = false;
+    public bool Grounded, Running;
 
-    public float LimitRotation = 30.0f, sensivity = 10.0f, angle, rotationx = 0;
+    private int nbAmmo;
+    public float LimitRotation = 30.0f, sensivity = 10.0f, angle, rotationx = 0, timerShoot = 0.1f;
 
-    private float maxHealth = 100,runningSpeed = 30f, walkingSpeed = 15f,gravity = 9, jumpForce =5;
+    private float runningSpeed = 30f, walkingSpeed = 15f,gravity = 9, jumpForce =5;
 
     private void Start()
     {
         charactercontroller = GetComponent<CharacterController>();
+        nbAmmo = gameObject.GetComponent<AmmowScript>().Currentammow;
     }
     void Update()
     {
@@ -81,6 +82,32 @@ public class PlayerScript : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensivity, 0);
 
         //---ALLER-A-LA-ZONE---//
+
+        //---TIR---//
+
+        timerShoot -= Time.deltaTime;
+
+        if (Input.GetButton("Shoot") && timerShoot <= 0)
+        {
+            GetComponent<AmmowScript>().Currentammow -= 1;
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
+            {
+                EnemiesBT cible = hit.collider.GetComponent<EnemiesBT>();
+
+                if (cible != null)
+                {
+                    cible.GetComponent<CibleScript>().Hit(10);
+                }
+            }
+            
+            timerShoot = 0.1f;
+        }
+        
+
+        if(timerShoot <= 0)
+        {
+            timerShoot = 0;
+        }
 
     }
 

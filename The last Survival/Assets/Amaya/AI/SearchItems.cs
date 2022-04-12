@@ -14,6 +14,6 @@ public class SearchItems : Nodes
 
     public override NodesState Evaluate()
     {
-        return base.Evaluate();
+        return NodesState.SUCCESS;
     }
 }

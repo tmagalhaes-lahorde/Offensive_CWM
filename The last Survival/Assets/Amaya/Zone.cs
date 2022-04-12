@@ -29,8 +29,6 @@ public class Zone : MonoBehaviour
         outsideWalls.gameObject.SetActive(false);
         insideWalls.localScale = new Vector3(2300, 500, 2300);
         outsideWalls.localScale = new Vector3(2300, 500, 2300);
-        insideWalls.position = transform.position;
-        outsideWalls.position = transform.position;
         GameObject[] users = GameObject.FindGameObjectsWithTag("User");
         foreach(GameObject user in users)
         {
@@ -45,6 +43,9 @@ public class Zone : MonoBehaviour
 
     private void Update()
     {
+        insideWalls.position = centerZone;
+        outsideWalls.position = centerZone;
+        transform.position = centerZone;
 
         if (stormActive == false)
         {   

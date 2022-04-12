@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpawnerEnnemies : MonoBehaviour
 {
@@ -18,9 +19,13 @@ public class SpawnerEnnemies : MonoBehaviour
     {
         while(EnnemiesCount < 98)
         {
-            Xpos = Random.Range(-499, 499);
-            Zpos = Random.Range(-473, 473);
-            Instantiate(ennemy, new Vector3(Xpos, 100, Zpos), Quaternion.identity);
+            Xpos = Random.Range(-501, 499);
+            Zpos = Random.Range(-501, 473);
+
+            NavMeshHit hit;
+            while (!NavMesh.SamplePosition(new Vector3(Xpos, 50, Zpos), out hit, 100.0f, NavMesh.AllAreas));
+
+            Instantiate(ennemy, hit.position, Quaternion.identity);
             yield return new WaitForSeconds(0f);
             EnnemiesCount += 1;
 

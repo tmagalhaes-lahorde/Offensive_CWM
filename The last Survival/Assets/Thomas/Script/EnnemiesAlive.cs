@@ -20,7 +20,7 @@ public class EnnemiesAlive : MonoBehaviour
     void Update()
     {
        
-        EnnemiesAliveCount = GameObject.FindGameObjectsWithTag("Ennemies");
+        EnnemiesAliveCount = GameObject.FindGameObjectsWithTag("User");
         text.text = EnnemiesAliveCount.Length.ToString();
     }
 }

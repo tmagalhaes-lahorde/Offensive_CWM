@@ -57,10 +57,11 @@ public class AttackTarget : Nodes
                             cible.Hit(10);
                         }
 
-                        //if(playerHealth != null)
-                        //{
-                        //    playerHealth.DamageButton(10);
-                        //}
+                        if(playerHealth != null)
+                        {
+                            playerHealth.DamageButton(10);
+                        }
+
                         timer = 0.1f;
                     }
                 }

@@ -6,7 +6,7 @@ public class WeaponManager : MonoBehaviour
 {
     private AudioSource _AudioSource;
 
-    public float range = 100.0f;
+    public float range;
 
     public int bulletsPerMag = 31; // Nombre de balles par chargeurs
     public int bulletsleft = 310;  // Notre réserve de balles 
@@ -45,14 +45,13 @@ public class WeaponManager : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(shootPoint.position,shootPoint.transform.forward,out hit, range))
-
+        if (Physics.Raycast(transform.position,transform.forward,out hit, 200))
         {
             Debug.Log(hit.transform.name + "has been found");
 
-            if (hit.collider.gameObject.GetComponent<Receive_Action>() != null)
+            if (hit.collider.gameObject.GetComponent<CibleScript>() != null)
             {
-                hit.collider.gameObject.GetComponent<Receive_Action>().GetDammage(bulletDammage);
+                hit.collider.gameObject.GetComponent<CibleScript>().nbHealth -= 10;
 
             }
         }
@@ -70,5 +69,10 @@ public class WeaponManager : MonoBehaviour
     private void PlayShootSound()
     {
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 }
