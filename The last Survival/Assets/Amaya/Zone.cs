@@ -39,11 +39,13 @@ public class Zone : MonoBehaviour
         }
         
         centerZone /= i;
+
         dividedZone = zoneRadius / 2;
     }
 
     private void Update()
     {
+
         if (stormActive == false)
         {   
 

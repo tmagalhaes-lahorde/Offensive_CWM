@@ -10,7 +10,7 @@ public class EnemiesBT : TreeBuild
     public NavMeshAgent WayPointFollow;
     public Animator Animator;
     public NavMeshAgent Agent;
-    public Zone Zone;
+    //public Zone Zone;
     public static float fovRange = 20f;
     public static int NbAmmo = 50;
 
