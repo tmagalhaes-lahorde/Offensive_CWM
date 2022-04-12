@@ -32,7 +32,7 @@ public class WeaponManager : MonoBehaviour
         if(Input.GetButton("Fire1"))
         {
             Fire();
-         
+            GetComponent<AmmowScript>().Currentammow -= 1;
         }
 
         if (fireTimer < fireRate)
@@ -49,18 +49,17 @@ public class WeaponManager : MonoBehaviour
 
         {
             Debug.Log(hit.transform.name + "has been found");
-                        
+
+            if (hit.collider.gameObject.GetComponent<Receive_Action>() != null)
+            {
+                hit.collider.gameObject.GetComponent<Receive_Action>().GetDammage(bulletDammage);
+
+            }
         }
 
-        if (hit.collider.gameObject.GetComponent<Receive_Action>() != null)
-        {
-            hit.collider.gameObject.GetComponent<Receive_Action>().GetDammage(bulletDammage);
-
-        }
         currentBullets--;
         fireTimer = 0.0f;
         PlayShootSound();
-
     }
 
     private void PlayEmptySound()
