@@ -7,10 +7,8 @@ using BehaviourTree;
 public class EnemiesBT : TreeBuild
 {
     public Transform User;
-    public NavMeshAgent WayPointFollow;
     public Animator Animator;
     public NavMeshAgent Agent;
-    //public Zone Zone;
     public static float fovRange = 20f;
     public static int NbAmmo = 50;
 
@@ -18,28 +16,42 @@ public class EnemiesBT : TreeBuild
     {
         Nodes root = new Selector(new List<Nodes>
         {
-            new GoToZone(User,Animator),
+            new GoToZone(User,Animator, Agent),
+
             new Sequence(new List<Nodes>
             {
-                new Explore(User,Animator,Agent,WayPointFollow),
-                new Selector(new List<Nodes>
-                {
-                    new Sequence(new List<Nodes>
-                    {
-                        new FieldOfView(User,Animator),
-                        new Selector(new List<Nodes>
-                        {
-                            new Sequence (new List<Nodes>
-                            {
-                                new RandBehaviour(User),
-                                new AttackTarget(User,Animator),
-                            }),
-                            //new FleeTarget(User,Animator,Agent),
-                        }),
-                    }),
-                    new SearchItems(User,Animator),
-                }),
+               new CheckHealth(User,Animator),
+               new CheckAmmo(User,Animator),
+
+               new FieldOfView(User,Animator),
+               new Selector(new List<Nodes>
+               {
+                   new Sequence(new List<Nodes>
+                   {
+                       new RandBehaviour(User),
+                       new AttackTarget(User,Animator),
+                   }),
+
+                   new FleeTarget(User,Animator,Agent),
+                   
+
+               })
             }),
+
+            new Sequence(new List<Nodes>
+            {
+                new FOVKit(User,Animator),
+                new SearchItems(User,Animator),
+            }),
+            
+            new Sequence(new List<Nodes>
+            {
+                new FOVAmmo(User,Animator),
+                new SearchItems(User,Animator),
+            }),
+
+            new Explore(User,Animator),
+
 
         }) ;
 
