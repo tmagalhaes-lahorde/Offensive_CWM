@@ -23,7 +23,7 @@ public class PVScript : MonoBehaviour
 
     private void Start()
     {
-        inStormEffect.enabled = false;
+        //inStormEffect.enabled = false;
     }
 
     // Update is called once per frame
@@ -59,20 +59,22 @@ public class PVScript : MonoBehaviour
             text.text = "0";
         }
 
-        if(outZone == false)
-        {
-        }
-        else if(outZone == true)
-        {
-            timerInZone -= Time.deltaTime;
+        //if(outZone == false)
+        //{
+        //    inStormEffect.enabled = false;
+        //}
+        //else if(outZone == true)
+        //{
+        //    inStormEffect.enabled = true;
+        //    timerInZone -= Time.deltaTime;
 
-            if(timerInZone <= 0)
-            {
-                Debug.Log("cc");
-                CurrentHealth -= 1;
-                timerInZone = 1;
-            }
-        }
+        //    if(timerInZone <= 0)
+        //    {
+        //        Debug.Log("cc");
+        //        CurrentHealth -= 1;
+        //        timerInZone = 1;
+        //    }
+        //}
     }
     
     private void OnTriggerEnter(Collider other)
