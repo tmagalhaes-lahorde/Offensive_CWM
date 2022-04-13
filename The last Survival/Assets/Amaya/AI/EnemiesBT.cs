@@ -9,6 +9,8 @@ public class EnemiesBT : TreeBuild
     public Transform User;
     public Animator Animator;
     public NavMeshAgent Agent;
+    public NavMeshAgent WpFollow;
+    public Zone Zone;
     public static float fovRange = 20f;
     public static int NbAmmo = 50;
 
@@ -16,7 +18,7 @@ public class EnemiesBT : TreeBuild
     {
         Nodes root = new Selector(new List<Nodes>
         {
-            new GoToZone(User,Animator, Agent),
+            new GoToZone(User,Animator,WpFollow,Zone),
 
             new Sequence(new List<Nodes>
             {
@@ -50,7 +52,7 @@ public class EnemiesBT : TreeBuild
                 new SearchItems(User,Animator),
             }),
 
-            new Explore(User,Animator),
+            new Explore(User,Animator,Agent,WpFollow),
 
 
         }) ;

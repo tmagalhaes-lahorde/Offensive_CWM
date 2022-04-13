@@ -10,18 +10,19 @@ public class GoToZone : Nodes
     private Transform _transform;
     private Animator _animator;
     private NavMeshAgent _waypointFollow;
-    public GoToZone(Transform transform, Animator animator, NavMeshAgent wpFollow)
+    public GoToZone(Transform transform, Animator animator, NavMeshAgent wpFollow,Zone zone)
     {
         _transform = transform;
         _animator = animator;
         _waypointFollow = wpFollow;
+        _zone = zone;
     }
 
     public override NodesState Evaluate()
     {
-        _transform.GetComponent<PVScript>();
+        _transform.GetComponent<CibleScript>();
 
-        if(_transform.gameObject.GetComponent<PVScript>().outZone == true)
+        if(_transform.gameObject.GetComponent<CibleScript>().outZone == true)
         {
             _waypointFollow.transform.position = _zone.centerZone;
         }
