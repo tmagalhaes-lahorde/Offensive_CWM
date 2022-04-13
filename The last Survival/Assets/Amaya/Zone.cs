@@ -9,6 +9,7 @@ public class Zone : MonoBehaviour
     private CapsuleCollider zone;
     public Transform insideWalls;
     public Transform outsideWalls;
+    public Transform centerZoneTrans;
 
     public float zoneRadius = 600, dividedZone;
     float timerFirstZone = 6f, timerNextZone = 10f;
@@ -36,7 +37,7 @@ public class Zone : MonoBehaviour
             centerZone += users[i].transform.position;
             i += 1;
         }
-        
+
         centerZone /= i;
 
         dividedZone = zoneRadius / 2;
@@ -47,6 +48,7 @@ public class Zone : MonoBehaviour
         insideWalls.position = centerZone;
         outsideWalls.position = centerZone;
         transform.position = centerZone;
+        centerZoneTrans.position = new Vector3(centerZone.x, 0, centerZone.z);
 
         if (stormActive == false)
         {   

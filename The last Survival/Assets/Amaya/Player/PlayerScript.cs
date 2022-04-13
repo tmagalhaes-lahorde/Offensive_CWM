@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
     public Transform arrowPointer;
+    public Transform targetCenterZone;
     public Camera HeadPlayer;
     public CharacterController charactercontroller;
     public LineRenderer goToZone;
@@ -89,8 +90,6 @@ public class PlayerScript : MonoBehaviour
 
         //---ALLER-A-LA-ZONE---//
 
-        Vector3 zoneDir = inZone.centerZone;
-        arrowPointer.LookAt(zoneDir);
 
         //---TIR (CLAVIER)---//
 
@@ -113,6 +112,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //---TIR(MANETTE)---//
+
          if(Input.GetAxis("Shoot") == 1 && timerShoot <= 0)
         {
             GetComponent<AmmowScript>().Currentammow -= 1;
