@@ -18,7 +18,7 @@ public class EnemiesBT : TreeBuild
     {
         Nodes root = new Selector(new List<Nodes>
         {
-            new GoToZone(User,Animator,WpFollow,Zone),
+            new GoToZone(User,Animator,Agent,WpFollow,Zone),
 
             new Sequence(new List<Nodes>
             {

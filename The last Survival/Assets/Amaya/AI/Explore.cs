@@ -24,8 +24,8 @@ public class Explore : Nodes
 
         if (timerNextPos <= 0)
         {
-            int x = Random.Range(-50, 50);
-            int z = Random.Range(-50, 50);
+            int x = Random.Range(-150, 150);
+            int z = Random.Range(-150, 150);
 
             _wayPointFollow.SetDestination(new Vector3(x + _wayPointFollow.transform.position.x, _wayPointFollow.transform.position.y, z + _wayPointFollow.transform.position.z));
             _agent.SetDestination(_wayPointFollow.transform.position);
