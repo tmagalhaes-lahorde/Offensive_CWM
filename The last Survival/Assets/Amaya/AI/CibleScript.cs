@@ -43,7 +43,7 @@ public class CibleScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("soin") && nbHealth <= 100)
+        if (other.CompareTag("HealthKit") && nbHealth <= 100)
         {
             nbHealth = 100;
             GameObject.Destroy(other.gameObject);

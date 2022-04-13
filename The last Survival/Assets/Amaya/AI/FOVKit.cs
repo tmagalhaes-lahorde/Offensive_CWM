@@ -20,6 +20,10 @@ public class FOVKit : Nodes
     {
         List<GameObject> kits = new List<GameObject>();
 
+        if (_transform.gameObject.GetComponent<CibleScript>().nbHealth > 50)
+        {
+            return NodesState.FAILURE;
+        }
         for (int i = 0; i < medikits.Length; i++)
         {
             kits.Add(medikits[i].gameObject);
@@ -29,15 +33,18 @@ public class FOVKit : Nodes
         {
             if (kit.activeSelf == true)
             {
-                if (Vector3.Distance(kit.transform.position, _transform.position) < 10)
+                if(_transform.gameObject.GetComponent<CibleScript>().nbHealth <= 50)
                 {
-                    Vector3 dir = kit.transform.position - _transform.position;
-                    float angle = Vector3.Angle(dir, _transform.forward);
-
-                    if (angle < 60)
+                    if (Vector3.Distance(kit.transform.position, _transform.position) < 10)
                     {
-                        _transform.LookAt(kit.transform.position);
-                        return NodesState.SUCCESS;
+                        Vector3 dir = kit.transform.position - _transform.position;
+                        float angle = Vector3.Angle(dir, _transform.forward);
+
+                        if (angle < 60)
+                        {
+                            _transform.LookAt(kit.transform.position);
+                            return NodesState.SUCCESS;
+                        }
                     }
                 }
             }

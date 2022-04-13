@@ -43,13 +43,13 @@ public class EnemiesBT : TreeBuild
             new Sequence(new List<Nodes>
             {
                 new FOVKit(User,Animator),
-                new SearchItems(User,Animator),
+                new SearchItems(User,Animator,Agent),
             }),
             
             new Sequence(new List<Nodes>
             {
                 new FOVAmmo(User,Animator),
-                new SearchItems(User,Animator),
+                new SearchItems(User,Animator,Agent),
             }),
 
             new Explore(User,Animator,Agent,WpFollow),

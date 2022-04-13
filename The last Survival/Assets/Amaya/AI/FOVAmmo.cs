@@ -19,6 +19,11 @@ public class FOVAmmo : Nodes
     {
         List<GameObject> ammo = new List<GameObject>();
 
+        if (_transform.gameObject.GetComponent<AmmoScript>().nbAmmo > 50)
+        {
+            return NodesState.FAILURE;
+        }
+
         for (int i = 0; i < ammobox.Length; i++)
         {
             ammo.Add(ammobox[i].gameObject);
@@ -28,17 +33,21 @@ public class FOVAmmo : Nodes
         {
             if (ammow.activeSelf == true)
             {
-                if (Vector3.Distance(ammow.transform.position, _transform.position) < 10)
+                if(_transform.gameObject.GetComponent<AmmoScript>().nbAmmo <= 50)
                 {
-                    Vector3 dir = ammow.transform.position - _transform.position;
-                    float angle = Vector3.Angle(dir, _transform.forward);
-
-                    if (angle < 60)
+                    if (Vector3.Distance(ammow.transform.position, _transform.position) < 10)
                     {
-                        _transform.LookAt(ammow.transform.position);
-                        return NodesState.SUCCESS;
+                        Vector3 dir = ammow.transform.position - _transform.position;
+                        float angle = Vector3.Angle(dir, _transform.forward);
+
+                        if (angle < 60)
+                        {
+                            _transform.LookAt(ammow.transform.position);
+                            return NodesState.SUCCESS;
+                        }
                     }
                 }
+                
             }
         }
         return NodesState.FAILURE;
