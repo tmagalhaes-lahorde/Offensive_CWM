@@ -13,7 +13,7 @@ public class Zone : MonoBehaviour
     public float zoneRadius = 600, dividedZone;
     float timerFirstZone = 6f, timerNextZone = 10f;
     private float deltaRadius = 0.03f; //vitesse de reduction de la zone
-    private Vector3 centerZone = Vector3.zero; //definit le centre de la zone
+    public Vector3 centerZone = Vector3.zero; //definit le centre de la zone
 
     private int i = 0;
 
@@ -29,6 +29,7 @@ public class Zone : MonoBehaviour
         outsideWalls.gameObject.SetActive(false);
         insideWalls.localScale = new Vector3(2300, 500, 2300);
         outsideWalls.localScale = new Vector3(2300, 500, 2300);
+
         GameObject[] users = GameObject.FindGameObjectsWithTag("User");
         foreach(GameObject user in users)
         {

@@ -52,7 +52,7 @@ public class PVScript : MonoBehaviour
         //    CurrentHealth = 100;
         //}
 
-        if (Input.GetKeyDown(KeyCode.K) && medikit >= 1 && CurrentHealth != 100) 
+        if (Input.GetKeyDown(KeyCode.K) || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
         {
             CurrentHealth = 100;
             medikit = 0;

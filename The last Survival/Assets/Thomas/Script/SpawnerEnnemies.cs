@@ -26,6 +26,7 @@ public class SpawnerEnnemies : MonoBehaviour
             while (!NavMesh.SamplePosition(new Vector3(Xpos, 50, Zpos), out hit, 100.0f, NavMesh.AllAreas));
 
             Instantiate(ennemy, hit.position, Quaternion.identity);
+
             yield return new WaitForSeconds(0f);
             EnnemiesCount += 1;
 
