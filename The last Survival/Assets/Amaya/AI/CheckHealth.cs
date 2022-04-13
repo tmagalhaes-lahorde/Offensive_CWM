@@ -16,6 +16,11 @@ public class CheckHealth : Nodes
 
     public override NodesState Evaluate()
     {
+        if(_transform.gameObject.GetComponent<CibleScript>().nbHealth>=60)
+
+        {
+            return NodesState.SUCCESS;
+        }
         return NodesState.FAILURE;
     }
 }

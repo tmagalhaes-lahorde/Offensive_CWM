@@ -10,10 +10,12 @@ public class GoToZone : Nodes
     private Transform _transform;
     private Animator _animator;
     private NavMeshAgent _waypointFollow;
-    public GoToZone(Transform transform, Animator animator, NavMeshAgent wpFollow,Zone zone)
+    private NavMeshAgent _agent;
+    public GoToZone(Transform transform, Animator animator,NavMeshAgent agent, NavMeshAgent wpFollow,Zone zone)
     {
         _transform = transform;
         _animator = animator;
+        _agent = agent;
         _waypointFollow = wpFollow;
         _zone = zone;
     }
@@ -22,9 +24,12 @@ public class GoToZone : Nodes
     {
         _transform.GetComponent<CibleScript>();
 
-        if(_transform.gameObject.GetComponent<CibleScript>().outZone == true)
+        if (_transform.gameObject.GetComponent<CibleScript>().outZone)
         {
-            _waypointFollow.transform.position = _zone.centerZone;
+            _waypointFollow.SetDestination(_zone.centerZone);
+            _agent.SetDestination(_waypointFollow.transform.position);
+            return NodesState.SUCCESS;
+
         }
         return NodesState.FAILURE;
     }

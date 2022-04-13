@@ -16,6 +16,11 @@ public class CheckAmmo : Nodes
 
     public override NodesState Evaluate()
     {
+        if(_transform.gameObject.GetComponent<AmmoScript>().nbAmmo>=50)
+
+        {
+            return NodesState.SUCCESS;
+        }
         return NodesState.FAILURE;
     }
 }
