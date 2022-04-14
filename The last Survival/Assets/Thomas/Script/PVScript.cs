@@ -11,6 +11,9 @@ public class PVScript : MonoBehaviour
     public float Maxhealth = 100.0f;
     private float timerInZone = 1;
 
+    public AudioSource healthSource;
+    public AudioClip healthClip;
+
     public bool outZone = false;
     //public Image HealthBarImage;
     //public TextMeshProUGUI healthText;
@@ -88,6 +91,7 @@ public class PVScript : MonoBehaviour
         if (other.CompareTag("HealthKit") && medikit <= 0) 
         {
             //text.text = "1";
+            healthSource.PlayOneShot(healthClip);
             medikit = 1;
             GameObject.Destroy(other.gameObject);
         }
