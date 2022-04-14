@@ -7,6 +7,7 @@ using BehaviourTree;
 public class EnemiesBT : TreeBuild
 {
     public Transform User;
+    public Transform Player;
     public Animator Animator;
     public NavMeshAgent Agent;
     public NavMeshAgent WpFollow;

@@ -7,26 +7,27 @@ using BehaviourTree;
 public class FieldOfView : Nodes
 {
     private Transform _transform;
+    private Transform _player;
     private Animator _animator;
     private static LayerMask _enemyLayerMask = 1 << 8;
+    private bool isInit = false;
+
     GameObject[] users;
-    public FieldOfView(Transform transform, Animator animator)
+    public FieldOfView(Transform transform,Animator animator)
     {
         _transform = transform;
         _animator = animator;
-        users = GameObject.FindGameObjectsWithTag("User");
-
     }
     public override NodesState Evaluate()
     {
-        List<GameObject> ennemis = new List<GameObject>();
-
-        for(int i = 0; i < users.Length; i++)
+        if (!isInit)
         {
-            ennemis.Add(users[i].gameObject);
+            users = GameObject.FindGameObjectsWithTag("User");
+            isInit = true;
         }
+        ClearData("target");
 
-        foreach (GameObject user in ennemis)
+        foreach (GameObject user in users)
         {
             if (user != _transform.gameObject)
             {
@@ -39,6 +40,7 @@ public class FieldOfView : Nodes
                     if (angle < 60)
                     {
                         _transform.LookAt(user.transform.position);
+                        SetData("target", user.transform);
                         return NodesState.SUCCESS;
                     }
                 }
