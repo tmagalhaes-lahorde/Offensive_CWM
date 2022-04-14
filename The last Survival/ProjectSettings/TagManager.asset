@@ -10,6 +10,7 @@ TagManager:
   - Ammow
   - Zone
   - HealthKit
+  - NextZone
   layers:
   - Default
   - TransparentFX

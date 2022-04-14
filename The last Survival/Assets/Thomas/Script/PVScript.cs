@@ -41,32 +41,32 @@ public class PVScript : MonoBehaviour
         HealthBarImage.fillAmount = CurrentHealth / Maxhealth;
         healthText.text = CurrentHealth + " / " + Maxhealth;
 
-        if (CurrentHealth >= 70)
-        {
-            color.color = Color.green;
-        }
-
-        if (CurrentHealth <= 70)
-        {
-            color.color = Color.yellow;
-        }
-
-        if (CurrentHealth <= 30)
-        {
-            color.color = Color.red;
-        }
-
-        if (CurrentHealth >= 100)
-        {
-            CurrentHealth = 100;
-        }
-
-        if (Input.GetKeyDown(KeyCode.K) || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
-        {
-            CurrentHealth = 100;
-            medikit = 0;
-            //text.text = "0";
-        }
+        //if (CurrentHealth >= 70)
+        //{
+        //    color.color = Color.green;
+        //}
+        //
+        //if (CurrentHealth <= 70)
+        //{
+        //    color.color = Color.yellow;
+        //}
+        //
+        //if (CurrentHealth <= 30)
+        //{
+        //    color.color = Color.red;
+        //}
+        //
+        //if (CurrentHealth >= 100)
+        //{
+        //    CurrentHealth = 100;
+        //}
+        //
+        //if (Input.GetKeyDown(KeyCode.K) || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
+        //{
+        //    CurrentHealth = 100;
+        //    medikit = 0;
+        //    //text.text = "0";
+        //}
 
         if(outZone == true)
         {

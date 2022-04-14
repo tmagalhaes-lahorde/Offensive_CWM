@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Zone : MonoBehaviour
 {
     public Image zoneSign;
-    private CapsuleCollider zone;
+    public CapsuleCollider zone;
     public Transform insideWalls;
     public Transform outsideWalls;
     public Transform centerZoneTrans;
@@ -14,15 +14,16 @@ public class Zone : MonoBehaviour
     public AudioSource zoneSource;
     public AudioClip zoneClip;
 
+    public bool outNextZone;
     public float zoneRadius = 600, dividedZone;
-    float timerFirstZone = 6f, timerNextZone = 10f;
-    private float deltaRadius = 0.03f; //vitesse de reduction de la zone
+    float timerFirstZone = 2f, timerNextZone = 3f;
+    public float deltaRadius = 0.0165f; //vitesse de reduction de la zone
     public Vector3 centerZone = Vector3.zero; //definit le centre de la zone
 
     private int i = 0;
 
     public bool stormActive = false, playSound,firstZoneEnabled = false;
-    private bool stormLimit,shouldStart;
+    public bool stormLimit,shouldStart;
     private int nbStorm = 0;
 
     private void Start()
@@ -31,10 +32,11 @@ public class Zone : MonoBehaviour
         zone.radius = zoneRadius;
         insideWalls.gameObject.SetActive(false);
         outsideWalls.gameObject.SetActive(false);
-        insideWalls.localScale = new Vector3(2300, 500, 2300);
-        outsideWalls.localScale = new Vector3(2300, 500, 2300);
+        insideWalls.localScale = new Vector3(695, 500,695);
+        outsideWalls.localScale = new Vector3(695, 500,695);
 
         GameObject[] users = GameObject.FindGameObjectsWithTag("User");
+
         foreach(GameObject user in users)
         {
             centerZone += users[i].transform.position;
@@ -48,6 +50,7 @@ public class Zone : MonoBehaviour
 
     private void Update()
     {
+        centerZone.y = 0;
         insideWalls.position = centerZone;
         outsideWalls.position = centerZone;
         transform.position = centerZone;
@@ -58,7 +61,7 @@ public class Zone : MonoBehaviour
             
             timerFirstZone -= Time.deltaTime;
 
-            if(timerFirstZone <= 0 && firstZoneEnabled == false)
+            if (timerFirstZone <= 0 && firstZoneEnabled == false)
             {
                 insideWalls.gameObject.SetActive(true);
                 outsideWalls.gameObject.SetActive(true);
@@ -71,20 +74,23 @@ public class Zone : MonoBehaviour
                     firstZoneEnabled = true;
                     playSound = false;
                 }
-                timerNextZone -= Time.deltaTime;
+            }
 
+            if (firstZoneEnabled)
+            {
+                timerNextZone -= Time.deltaTime;
                 if (timerNextZone <= 0)
                 {
                     stormActive = true;
                 }
             }
+            
         }
         else if (stormActive == true)
         {
-            nbStorm += 1;
-            zoneRadius -= deltaRadius;
-            insideWalls.localScale = insideWalls.localScale - new Vector3(0.00335f, 0, 0.00335f);
-            outsideWalls.localScale = outsideWalls.localScale - new Vector3(0.00335f, 0, 0.00335f);
+            zone.radius -= deltaRadius;
+            insideWalls.localScale = insideWalls.localScale - new Vector3(0.03f, 0, 0.03f);
+            outsideWalls.localScale = outsideWalls.localScale - new Vector3(0.03f, 0, 0.03f);
 
             if (zone.radius <= dividedZone)
             {
@@ -96,12 +102,13 @@ public class Zone : MonoBehaviour
         if(stormLimit == true)
         {
             timerNextZone = 10f;
-            dividedZone = zoneRadius / 2;
+            dividedZone = zone.radius / 2;
             stormLimit = false;
         }
-    }
 
-    private void OnDrawGizmos()
-    {
+        if(zone.radius <= 15)
+        {
+            zone.radius = 15;
+        }
     }
 }

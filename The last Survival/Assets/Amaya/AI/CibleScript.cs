@@ -6,7 +6,7 @@ public class CibleScript : MonoBehaviour
 {
     public int nbHealth = 100;
     private float timerinzone = 1;
-    public bool outZone = false;
+    public bool outZone = false, outNextZone = true;
 
     void Update()
     {
@@ -43,13 +43,22 @@ public class CibleScript : MonoBehaviour
             other.enabled = false;
         }
 
-        if (other.gameObject.tag == "Zone")
+        if (other.gameObject.tag == "NextZone")
+        {
+            outNextZone = false;
+        }
+        if (other.gameObject.tag =="Zone")
         {
             outZone = false;
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.tag == "NextZone")
+        {
+            outNextZone = true;
+        }
+
         if (other.gameObject.tag == "Zone")
         {
             outZone = true;

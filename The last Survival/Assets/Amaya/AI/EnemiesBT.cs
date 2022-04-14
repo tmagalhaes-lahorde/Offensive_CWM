@@ -11,7 +11,7 @@ public class EnemiesBT : TreeBuild
     public Animator Animator;
     public NavMeshAgent Agent;
     public NavMeshAgent WpFollow;
-    public Zone Zone;
+    public nextZone Zone;
     public static float fovRange = 20f;
     public static int NbAmmo = 50;
     public AudioSource ShootEnnemie;
