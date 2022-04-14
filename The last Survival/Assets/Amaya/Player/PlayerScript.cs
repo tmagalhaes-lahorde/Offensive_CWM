@@ -12,13 +12,6 @@ public class PlayerScript : MonoBehaviour
     public AudioClip jumpClip;
     public AudioSource shootSource;
     public AudioClip shootClip;
-
-
-
-
-
-
-
     private Vector3 Deplacements;
     public Zone inZone;
     private PVScript Health;
@@ -37,6 +30,9 @@ public class PlayerScript : MonoBehaviour
     }
     void Update()
     {
+
+        Ray rayCam = HeadPlayer.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+
         //------------DEPLACEMENT AXES X ET Z --------------------//
 
         Vector3 z = transform.TransformDirection(Vector3.forward);
@@ -64,12 +60,6 @@ public class PlayerScript : MonoBehaviour
         Deplacements = z * speedZ + x * speedX;
        
 
-
-
-
-
-
-
         //-----------DEPLACEMENT AXE Y -------------------//
 
         if (charactercontroller.isGrounded && Input.GetButton("Jump"))
@@ -87,72 +77,56 @@ public class PlayerScript : MonoBehaviour
             Deplacements.y -= gravity * Time.deltaTime;
         }
         charactercontroller.Move(Deplacements * Time.deltaTime);
-       
 
 
+        //------------------ROTATION ENTIRE PLAYER (MOUSE)------------------------//
 
-
-
-        //------------------ROTATION JOUEUR ENTIER (SOURIS)------------------------//
-
-        rotationx += -Input.GetAxis("Mouse Y") * sensivity;
+        rotationx += -Input.GetAxis("Mouse Y") * 7;
 
         rotationx = Mathf.Clamp(rotationx, -LimitRotation, LimitRotation);
 
         HeadPlayer.transform.localRotation = Quaternion.Euler(rotationx, 0, 0);
 
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * sensivity, 0);
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * 7, 0);
 
 
-        rotationx += -Input.GetAxis("Joy RY") * 1;
+        rotationx += -Input.GetAxis("Joy RY") * 1.5f;
 
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Joy RX") * 1, 0);
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Joy RX") * 1.5f, 0);
 
-        //---ALLER-A-LA-ZONE---//
-
-
-        //---TIR (CLAVIER)---//
+        //---SHOOT (CLAVIER)---//
 
         timerShoot -= Time.deltaTime;
 
         if (Input.GetButton("Shoot") && timerShoot <= 0)
         {
             GetComponent<AmmowScript>().Currentammow -= 1;
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
+            shootSource.PlayOneShot(shootClip);
+
+            if (Physics.Raycast(rayCam, out RaycastHit hit,1000))
             {
-                EnemiesBT cible = hit.collider.GetComponent<EnemiesBT>();
-                shootSource.PlayOneShot(shootClip);
-
-                if (cible != null)
+                if(hit.collider.CompareTag("User"))
                 {
-                    cible.GetComponent<CibleScript>().Hit(10);
+                    hit.collider.GetComponent<CibleScript>().Hit(10);
                 }
-
             }
-
             timerShoot = 0.1f;
         }
 
-        //---TIR(MANETTE)---//
+        //---SHOOT(CONTROLLER)---//
 
         if (Input.GetAxis("Shoot") == 1 && timerShoot <= 0)
         {
             GetComponent<AmmowScript>().Currentammow -= 1;
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
+            if (Physics.Raycast(rayCam, out RaycastHit hit,1000))
             {
-                EnemiesBT cible = hit.collider.GetComponent<EnemiesBT>();
-                shootSource.PlayOneShot(shootClip);
-
-                if (cible != null)
+                if (hit.collider.CompareTag("User"))
                 {
-                    cible.GetComponent<CibleScript>().Hit(10);
+                    hit.collider.GetComponent<CibleScript>().Hit(10);
                 }
             }
-
             timerShoot = 0.1f;
         }
-
-
 
         if (timerShoot <= 0)
         {
