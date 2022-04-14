@@ -10,17 +10,11 @@ public class CibleScript : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(nbHealth);
 
         if(nbHealth <= 0)
         {
             this.gameObject.SetActive(false);
             nbHealth = 0;
-        }
-
-        if (outZone == false)
-        {
-            Debug.Log("ntm");
         }
 
         if (outZone == true)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class PVScript : MonoBehaviour
 {
@@ -12,52 +11,56 @@ public class PVScript : MonoBehaviour
     public float Maxhealth = 100.0f;
     private float timerInZone = 1;
 
-    public bool outZone = false,Winning;
-    public Image HealthBarImage;
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI text;
-    public Image color;
-    public RawImage inStormEffect;
+    public bool outZone = false;
+    //public Image HealthBarImage;
+    //public TextMeshProUGUI healthText;
+    //public TextMeshProUGUI text;
+    //public Image color;
+    //public RawImage inStormEffect;
 
     public int medikit = 0;
     
 
     private void Start()
     {
-        inStormEffect.enabled = false;
+        //inStormEffect.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        HealthBarImage.fillAmount = CurrentHealth / Maxhealth;
-        healthText.text = CurrentHealth + " / " + Maxhealth;
+        //HealthBarImage.fillAmount = CurrentHealth / Maxhealth;
+        //healthText.text = CurrentHealth + " / " + Maxhealth;
 
-        if (CurrentHealth >= 70)
-        {
-            color.color = Color.green;
-        }
+        //if (CurrentHealth >= 70)
+        //{
+        //    color.color = Color.green;
+        //}
 
-        if (CurrentHealth <= 70)
-        {
-            color.color = Color.yellow;
-        }
+        //if (CurrentHealth <= 70)
+        //{
+        //    color.color = Color.yellow;
+        //}
 
-        if (CurrentHealth <= 30)
-        {
-            color.color = Color.red;
-        }
+        //if (CurrentHealth <= 30)
+        //{
+        //    color.color = Color.red;
+        //}
 
-        if (CurrentHealth >= 100)
-        {
-            CurrentHealth = 100;
-        }
+        //if (CurrentHealth >= 100)
+        //{
+        //    CurrentHealth = 100;
+        //}
 
         if (Input.GetKeyDown(KeyCode.K) || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
         {
             CurrentHealth = 100;
             medikit = 0;
-            text.text = "0";
+            //text.text = "0";
+        }
+
+        if(outZone == false)
+        {
         }
 
         else if(outZone == true)
@@ -78,20 +81,13 @@ public class PVScript : MonoBehaviour
             }
         
         }
-
-        if(CurrentHealth <= 0)
-        {
-            Winning = true;
-            SceneManager.LoadScene("Win");
-            
-        }
     }
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("soin") && medikit <= 0) 
+        if (other.CompareTag("HealthKit") && medikit <= 0) 
         {
-            text.text = "1";
+            //text.text = "1";
             medikit = 1;
             GameObject.Destroy(other.gameObject);
         }
@@ -113,6 +109,7 @@ public class PVScript : MonoBehaviour
     public void DamageButton(int damage)
     {
         CurrentHealth -= damage;
+        Debug.Log("cc");
     }
     public void HealthButton(int Health)
     {
