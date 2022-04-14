@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CibleScript : MonoBehaviour
 {
-    public int nbHealth = 10;
+    public int nbHealth = 100;
     private float timerinzone = 1;
     public bool outZone = false;
 

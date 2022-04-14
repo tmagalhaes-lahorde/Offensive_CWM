@@ -80,13 +80,13 @@ public class AttackTarget : Nodes
                     {
                         if (hit.collider.GetComponent<CibleScript>())
                         {
-                            user.GetComponent<CibleScript>().nbHealth -= 100;
+                            user.GetComponent<CibleScript>().nbHealth -= 5;
                             if (user.GetComponent<CibleScript>().nbHealth <= 0)
                                 ClearData("target");
                         }
                         else if(user.GetComponent<PVScript>())
                         {
-                            user.GetComponent<PVScript>().CurrentHealth -= 100;
+                            user.GetComponent<PVScript>().CurrentHealth -= 5;
                             if (user.GetComponent<PVScript>().CurrentHealth <= 0)
                                 ClearData("target");
                         }
