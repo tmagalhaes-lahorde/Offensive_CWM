@@ -61,7 +61,6 @@ public class PVScript : MonoBehaviour
 
         if(outZone == false)
         {
-            Debug.Log("ntm");
         }
 
         else if(outZone == true)
@@ -86,7 +85,7 @@ public class PVScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("soin") && medikit <= 0) 
+        if (other.CompareTag("HealthKit") && medikit <= 0) 
         {
             //text.text = "1";
             medikit = 1;
@@ -110,6 +109,7 @@ public class PVScript : MonoBehaviour
     public void DamageButton(int damage)
     {
         CurrentHealth -= damage;
+        Debug.Log("cc");
     }
     public void HealthButton(int Health)
     {
