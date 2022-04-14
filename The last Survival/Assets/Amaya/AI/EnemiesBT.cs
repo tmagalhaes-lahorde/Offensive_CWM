@@ -13,6 +13,8 @@ public class EnemiesBT : TreeBuild
     public Zone Zone;
     public static float fovRange = 20f;
     public static int NbAmmo = 50;
+    public AudioSource ShootEnnemie;
+    public AudioClip ShootClipEnnemie;
 
     protected override Nodes SetupTree()
     {
@@ -31,7 +33,7 @@ public class EnemiesBT : TreeBuild
                    new Sequence(new List<Nodes>
                    {
                        new RandBehaviour(User),
-                       new AttackTarget(User,Animator),
+                       new AttackTarget(User,Animator,ShootEnnemie,ShootClipEnnemie),
                    }),
 
                    new FleeTarget(User,Animator,Agent),
