@@ -10,6 +10,9 @@ public class AmmowScript : MonoBehaviour
     public int Currentammow = 200;
     public int Maxammow = 200;
 
+    public AudioSource ammoSource;
+    public AudioClip ammoClip;
+
     public TextMeshProUGUI text;
 
     private void Start()
@@ -36,6 +39,7 @@ public class AmmowScript : MonoBehaviour
     {
         if (other.CompareTag("Ammow") && Currentammow != 200)
         {
+            ammoSource.PlayOneShot(ammoClip);
             Currentammow += 200;
             text.text = Currentammow + " / " + Maxammow;
             GameObject.Destroy(other.gameObject);

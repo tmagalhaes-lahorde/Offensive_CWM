@@ -11,9 +11,15 @@ public class AttackTarget : Nodes
     private GameObject[] users;
     private int nbHealth;
     private float timer = 0.1f;
+    private float timershoot = 0.1f;
 
-    public AttackTarget(Transform transform, Animator animator)
+    private AudioSource _shootEnnemieSource;
+    private AudioClip _shootEnnemieClip;
+
+    public AttackTarget(Transform transform, Animator animator, AudioSource shootEnnemieSource, AudioClip shootEnnemieClip)
     {
+        _shootEnnemieSource = shootEnnemieSource;
+        _shootEnnemieClip = shootEnnemieClip;
         _transform = transform;
         _animator = animator;
         users = GameObject.FindGameObjectsWithTag("User");
@@ -30,15 +36,19 @@ public class AttackTarget : Nodes
                 Vector3 dir = user.transform.position - _transform.position;
                 Vector3 lastDir = (dir + randDir) /2;
 
+                
+
                 if (Physics.Raycast(_transform.position,lastDir, out RaycastHit hit,10))
                 {
                     CibleScript cible = hit.collider.GetComponent<CibleScript>();
                     PVScript playerHealth = hit.collider.GetComponent<PVScript>();
 
                     timer -= Time.deltaTime;
-                    if (timer <= 0)
+                    timershoot -= Time.deltaTime;
+                    if (timer <= 0 && timershoot <= 0)
                     {
                         _transform.gameObject.GetComponent<AmmoScript>().nbAmmo -= 1;
+                        _shootEnnemieSource.PlayOneShot(_shootEnnemieClip);
 
                         //---ANIMATIONS---//
                         _animator.SetBool("Shoot", true);
@@ -63,6 +73,7 @@ public class AttackTarget : Nodes
                         }
 
                         timer = 0.1f;
+                        timershoot = 0.1f;
                     }
                 }
                 return NodesState.RUNNING;
