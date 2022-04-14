@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -10,6 +7,17 @@ public class PlayerScript : MonoBehaviour
     public Camera HeadPlayer;
     public CharacterController charactercontroller;
     public LineRenderer goToZone;
+
+    public AudioSource jumpSource;
+    public AudioClip jumpClip;
+    public AudioSource shootSource;
+    public AudioClip shootClip;
+
+
+
+
+
+
 
     private Vector3 Deplacements;
     public Zone inZone;
@@ -20,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     private int nbAmmo;
     public float LimitRotation = 30.0f, sensivity = 0.01f, angle, rotationx = 0, timerShoot = 0.1f;
 
-    private float runningSpeed = 30f, walkingSpeed = 15f,gravity = 9, jumpForce =5;
+    private float runningSpeed = 30f, walkingSpeed = 15f, gravity = 9, jumpForce = 5;
 
     private void Start()
     {
@@ -42,7 +50,7 @@ public class PlayerScript : MonoBehaviour
             Running = true;
         else Running = false;
 
-        
+
         if (Running == true)
         {
             speedX *= runningSpeed;
@@ -53,13 +61,21 @@ public class PlayerScript : MonoBehaviour
             speedX *= walkingSpeed;
             speedZ *= walkingSpeed;
         }
-        Deplacements = z * speedZ + x * speedX; 
+        Deplacements = z * speedZ + x * speedX;
+       
+
+
+
+
+
+
 
         //-----------DEPLACEMENT AXE Y -------------------//
 
         if (charactercontroller.isGrounded && Input.GetButton("Jump"))
         {
             Deplacements.y = jumpForce;
+            jumpSource.PlayOneShot(jumpClip);
         }
         else
         {
@@ -71,6 +87,10 @@ public class PlayerScript : MonoBehaviour
             Deplacements.y -= gravity * Time.deltaTime;
         }
         charactercontroller.Move(Deplacements * Time.deltaTime);
+       
+
+
+
 
 
         //------------------ROTATION JOUEUR ENTIER (SOURIS)------------------------//
@@ -101,24 +121,27 @@ public class PlayerScript : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
             {
                 EnemiesBT cible = hit.collider.GetComponent<EnemiesBT>();
+                shootSource.PlayOneShot(shootClip);
 
                 if (cible != null)
                 {
                     cible.GetComponent<CibleScript>().Hit(10);
                 }
+
             }
-            
+
             timerShoot = 0.1f;
         }
 
         //---TIR(MANETTE)---//
 
-         if(Input.GetAxis("Shoot") == 1 && timerShoot <= 0)
+        if (Input.GetAxis("Shoot") == 1 && timerShoot <= 0)
         {
             GetComponent<AmmowScript>().Currentammow -= 1;
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
             {
                 EnemiesBT cible = hit.collider.GetComponent<EnemiesBT>();
+                shootSource.PlayOneShot(shootClip);
 
                 if (cible != null)
                 {
@@ -137,6 +160,7 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
+    
 
 }
 
