@@ -13,12 +13,7 @@ public class PlayerScript : MonoBehaviour
     public AudioSource shootSource;
     public AudioClip shootClip;
 
-
-
-
-
-
-
+    public int nbkills = 0;
     private Vector3 Deplacements;
     public Zone inZone;
     private PVScript Health;
@@ -126,6 +121,7 @@ public class PlayerScript : MonoBehaviour
                 if (cible != null)
                 {
                     cible.GetComponent<CibleScript>().Hit(10);
+                    nbkills += 1;
                 }
 
             }
@@ -146,6 +142,7 @@ public class PlayerScript : MonoBehaviour
                 if (cible != null)
                 {
                     cible.GetComponent<CibleScript>().Hit(10);
+                    nbkills += 1;
                 }
             }
 

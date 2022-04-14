@@ -12,6 +12,7 @@ public class PVScript : MonoBehaviour
     private float timerInZone = 1;
 
     public bool outZone = false;
+    public bool lose = false;
     //public Image HealthBarImage;
     //public TextMeshProUGUI healthText;
     //public TextMeshProUGUI text;
@@ -29,6 +30,12 @@ public class PVScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (CurrentHealth <= 0)
+        {
+            lose = true;
+        }
+
         //HealthBarImage.fillAmount = CurrentHealth / Maxhealth;
         //healthText.text = CurrentHealth + " / " + Maxhealth;
 
@@ -59,10 +66,6 @@ public class PVScript : MonoBehaviour
             //text.text = "0";
         }
 
-        if(outZone == false)
-        {
-        }
-
         else if(outZone == true)
         {
             //inStormEffect.enabled = true;
@@ -79,7 +82,6 @@ public class PVScript : MonoBehaviour
                 timerInZone = 1;
         
             }
-        
         }
     }
     

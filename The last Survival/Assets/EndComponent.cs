@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class EndComponent : MonoBehaviour
 {
+    public GameObject Joueur_Restants;
+    public GameObject Player;
+    public GameObject GameTime;
+
     public Image WinBG;
 
     public Text Win;
@@ -15,9 +19,12 @@ public class EndComponent : MonoBehaviour
     public Text Rank;
     public Text Kills;
 
+    public Button MenuBTN;
+
     public bool Winning, Lost;
     private void Start()
     {
+        MenuBTN.gameObject.SetActive(false);
         WinBG.gameObject.SetActive(false);
         Win.gameObject.SetActive(false);
         Lose.gameObject.SetActive(false);
@@ -26,26 +33,26 @@ public class EndComponent : MonoBehaviour
         Rank.gameObject.SetActive(false);
         Kills.gameObject.SetActive(false);
 
-        Winning = false;
         Lost = false;
     }
 
     private void Update()
     {
 
-        Kills.text = GetComponent<PlayerScript>().nbKills.ToString() + "kills";
-        Rank.text = GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
-        Score.text = GetComponent<TimerScript>().time.ToString();
+        Kills.text = Player.GetComponent<PlayerScript>().nbkills.ToString();
+        Rank.text = Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
+        Score.text = GameTime.GetComponent<TimerScript>().time.ToString();
 
-        if(Winning)
+        if (Joueur_Restants.GetComponent<EnnemiesAlive>().win)
         {
             ActiveEnd();
             Win.gameObject.SetActive(true);
-
             Time.timeScale = 0f;
+
+            //Time.timeScale = 0f;
         }
 
-        if(Lost)
+        if(Player.GetComponent<PVScript>().lose)
         {
             ActiveEnd();
             Lose.gameObject.SetActive(true);
@@ -60,5 +67,7 @@ public class EndComponent : MonoBehaviour
         Score.gameObject.SetActive(true);
         Rank.gameObject.SetActive(true);
         Kills.gameObject.SetActive(true);
+
+        MenuBTN.gameObject.SetActive(true);
     }
 }
