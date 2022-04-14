@@ -11,6 +11,9 @@ public class Zone : MonoBehaviour
     public Transform outsideWalls;
     public Transform centerZoneTrans;
 
+    public AudioSource zoneSource;
+    public AudioClip zoneClip;
+
     public float zoneRadius = 600, dividedZone;
     float timerFirstZone = 6f, timerNextZone = 10f;
     private float deltaRadius = 0.03f; //vitesse de reduction de la zone
@@ -18,7 +21,7 @@ public class Zone : MonoBehaviour
 
     private int i = 0;
 
-    public bool stormActive = false;
+    public bool stormActive = false, playSound,firstZoneEnabled = false;
     private bool stormLimit,shouldStart;
     private int nbStorm = 0;
 
@@ -49,17 +52,25 @@ public class Zone : MonoBehaviour
         outsideWalls.position = centerZone;
         transform.position = centerZone;
         centerZoneTrans.position = new Vector3(centerZone.x, 0, centerZone.z);
-
+      
         if (stormActive == false)
-        {   
-
+        {
+            
             timerFirstZone -= Time.deltaTime;
 
-            if(timerFirstZone <= 0)
+            if(timerFirstZone <= 0 && firstZoneEnabled == false)
             {
                 insideWalls.gameObject.SetActive(true);
                 outsideWalls.gameObject.SetActive(true);
 
+                playSound = true;
+                if (playSound)
+                {
+                    zoneSource.PlayOneShot(zoneClip);
+                    timerFirstZone = 10;
+                    firstZoneEnabled = true;
+                    playSound = false;
+                }
                 timerNextZone -= Time.deltaTime;
 
                 if (timerNextZone <= 0)
