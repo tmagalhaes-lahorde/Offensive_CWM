@@ -42,7 +42,7 @@ public class AmmowScript : MonoBehaviour
             ammoSource.PlayOneShot(ammoClip);
             Currentammow += 200;
             text.text = Currentammow + " / " + Maxammow;
-            GameObject.Destroy(other.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

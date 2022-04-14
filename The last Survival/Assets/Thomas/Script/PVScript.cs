@@ -95,7 +95,7 @@ public class PVScript : MonoBehaviour
             //text.text = "1";
             healthSource.PlayOneShot(healthClip);
             medikit = 1;
-            GameObject.Destroy(other.gameObject);
+            other.enabled = false;
         }
 
         if (other.gameObject.tag == "Zone")

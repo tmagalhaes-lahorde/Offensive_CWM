@@ -39,7 +39,7 @@ public class EndComponent : MonoBehaviour
     private void Update()
     {
 
-        Kills.text = Player.GetComponent<PlayerScript>().nbkills.ToString();
+        //Kills.text = Player.GetComponent<PlayerScript>().nbkills.ToString();
         Rank.text = Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
         Score.text = GameTime.GetComponent<TimerScript>().time.ToString();
 

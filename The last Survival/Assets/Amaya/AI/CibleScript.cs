@@ -40,7 +40,7 @@ public class CibleScript : MonoBehaviour
         if (other.CompareTag("HealthKit") && nbHealth <= 100)
         {
             nbHealth = 100;
-            GameObject.Destroy(other.gameObject);
+            other.enabled = false;
         }
 
         if (other.gameObject.tag == "Zone")
