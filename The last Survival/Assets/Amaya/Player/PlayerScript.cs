@@ -10,6 +10,8 @@ public class PlayerScript : MonoBehaviour
     public Camera HeadPlayer;
     public CharacterController charactercontroller;
     public LineRenderer goToZone;
+    public int nbKills;
+    public Text nbKillsUI;
 
     private Vector3 Deplacements;
     public Zone inZone;
@@ -105,6 +107,11 @@ public class PlayerScript : MonoBehaviour
                 if (cible != null)
                 {
                     cible.GetComponent<CibleScript>().Hit(10);
+
+                    if (cible.GetComponent<CibleScript>().nbHealth <= 0)
+                    {
+                        nbKills += 1;
+                    }
                 }
             }
             
@@ -113,21 +120,25 @@ public class PlayerScript : MonoBehaviour
 
         //---TIR(MANETTE)---//
 
-         if(Input.GetAxis("Shoot") == 1 && timerShoot <= 0)
-        {
-            GetComponent<AmmowScript>().Currentammow -= 1;
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
-            {
-                EnemiesBT cible = hit.collider.GetComponent<EnemiesBT>();
+        // if(Input.GetAxis("Shoot") == 1 && timerShoot <= 0)
+        //{
+        //    GetComponent<AmmowScript>().Currentammow -= 1;
+        //    if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
+        //    {
+        //        EnemiesBT cible = hit.collider.GetComponent<EnemiesBT>();
 
-                if (cible != null)
-                {
-                    cible.GetComponent<CibleScript>().Hit(10);
-                }
-            }
+        //        if (cible != null)
+        //        {
+        //            cible.GetComponent<CibleScript>().Hit(10);
+        //            if(cible.GetComponent<CibleScript>().nbHealth <= 0)
+        //            {
+        //                nbKills += 1;
+        //            }
+        //        }
+        //    }
 
-            timerShoot = 0.1f;
-        }
+        //    timerShoot = 0.1f;
+        //}
 
 
 
