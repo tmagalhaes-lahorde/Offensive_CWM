@@ -16,7 +16,7 @@ public class ChangeSceneAvantMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             SceneManager.LoadScene("Menu");
             Cursor.visible = true;
