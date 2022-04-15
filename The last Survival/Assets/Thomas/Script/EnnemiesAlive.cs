@@ -24,7 +24,7 @@ public class EnnemiesAlive : MonoBehaviour
         EnnemiesAliveCount = GameObject.FindGameObjectsWithTag("User");
         text.text = EnnemiesAliveCount.Length.ToString();
 
-       if (EnnemiesAliveCount.Length == 1 && !Player.GetComponent<PVScript>().lose)
+       if (EnnemiesAliveCount.Length == 1)
         {
             win = true;
         }

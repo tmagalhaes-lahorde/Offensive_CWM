@@ -16,6 +16,8 @@ public class PlayerScript : MonoBehaviour
     public Zone inZone;
     private PVScript Health;
 
+    public int nbkills;
+
     public bool Grounded, Running;
 
     private int nbAmmo;
@@ -108,6 +110,10 @@ public class PlayerScript : MonoBehaviour
                 if(hit.collider.CompareTag("User"))
                 {
                     hit.collider.GetComponent<CibleScript>().Hit(10);
+                    //if (GetComponent<PVScript>().CurrentHealth <= 0)
+                    //{
+                    //    nbkills += 1;
+                    //}
                 }
             }
             timerShoot = 0.1f;
@@ -123,6 +129,12 @@ public class PlayerScript : MonoBehaviour
                 if (hit.collider.CompareTag("User"))
                 {
                     hit.collider.GetComponent<CibleScript>().Hit(10);
+
+                    //if (GetComponent<CibleScript>().nbHealth <= 0)
+                    //{
+                    //    Debug.Log("t'es a 0");
+                    //    nbkills += 1;
+                    //}
                 }
             }
             timerShoot = 0.1f;
