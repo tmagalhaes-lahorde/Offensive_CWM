@@ -17,7 +17,7 @@ public class SpawnerEnnemies : MonoBehaviour
 
     IEnumerator EnnemyDrop()
     {
-        while(EnnemiesCount < 98)
+        while(EnnemiesCount < 97)
         {
             Xpos = Random.Range(-501, 499);
             Zpos = Random.Range(-501, 473);

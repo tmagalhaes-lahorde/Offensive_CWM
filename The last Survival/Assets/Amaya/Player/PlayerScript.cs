@@ -130,11 +130,10 @@ public class PlayerScript : MonoBehaviour
                 {
                     hit.collider.GetComponent<CibleScript>().Hit(10);
 
-                    //if (GetComponent<CibleScript>().nbHealth <= 0)
-                    //{
-                    //    Debug.Log("t'es a 0");
-                    //    nbkills += 1;
-                    //}
+                    if (GetComponent<CibleScript>().nbHealth <= 0)
+                    {
+                        nbkills += 1;
+                    }
                 }
             }
             timerShoot = 0.1f;
