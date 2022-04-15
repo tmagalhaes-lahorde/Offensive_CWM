@@ -15,8 +15,8 @@ public class Zone : MonoBehaviour
     public AudioClip zoneClip;
 
     public bool outNextZone;
-    public float zoneRadius = 600, dividedZone;
-    float timerFirstZone = 2f, timerNextZone = 3f;
+    public float zoneRadius = 695, dividedZone;
+    float timerFirstZone = 60f, timerNextZone = 120f;
     public float deltaRadius = 0.0165f; //vitesse de reduction de la zone
     public Vector3 centerZone = Vector3.zero; //definit le centre de la zone
 
