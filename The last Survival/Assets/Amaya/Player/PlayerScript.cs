@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour
     private int nbAmmo;
     public float LimitRotation = 30.0f, sensivity = 0.01f, angle, rotationx = 0, timerShoot = 0.1f;
 
-    private float runningSpeed = 30f, walkingSpeed = 15f, gravity = 9, jumpForce = 5;
+    private float runningSpeed = 20f, walkingSpeed = 10f, gravity = 9, jumpForce = 5;
 
     private void Start()
     {
@@ -124,16 +124,17 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetAxis("Shoot") == 1 && timerShoot <= 0)
         {
             GetComponent<AmmowScript>().Currentammow -= 1;
+            shootSource.PlayOneShot(shootClip);
             if (Physics.Raycast(rayCam, out RaycastHit hit,1000))
             {
                 if (hit.collider.CompareTag("User"))
                 {
                     hit.collider.GetComponent<CibleScript>().Hit(10);
 
-                    if (GetComponent<CibleScript>().nbHealth <= 0)
-                    {
-                        nbkills += 1;
-                    }
+                    //if (GetComponent<CibleScript>().nbHealth <= 0)
+                    // {
+                    //   nbkills += 1;
+                    //}
                 }
             }
             timerShoot = 0.1f;

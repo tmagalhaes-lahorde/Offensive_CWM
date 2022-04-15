@@ -40,7 +40,7 @@ public class AmmowScript : MonoBehaviour
         if (other.CompareTag("Ammow") && Currentammow <= 200)
         {
             Debug.Log("Ammow");
-            //ammoSource.PlayOneShot(ammoClip);
+            ammoSource.PlayOneShot(ammoClip);
             Currentammow += 200;
             text.text = Currentammow + " / " + Maxammow;
             other.gameObject.SetActive(false);
