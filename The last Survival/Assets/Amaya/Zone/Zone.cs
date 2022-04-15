@@ -17,8 +17,8 @@ public class Zone : MonoBehaviour
     public bool outNextZone;
     public float zoneRadius = 695, dividedZone;
     float timerFirstZone = 60f, timerNextZone = 120f;
-    public float deltaRadius = 0.0165f; //vitesse de reduction de la zone
-    public Vector3 centerZone = Vector3.zero; //definit le centre de la zone
+    public float deltaRadius = 0.0165f; // reducing speed
+    public Vector3 centerZone = Vector3.zero;
 
     private int i = 0;
 
@@ -28,12 +28,15 @@ public class Zone : MonoBehaviour
 
     private void Start()
     {
+        //Set all scales and disable objects that should not be appearing at the beginning
         zone = GetComponent<CapsuleCollider>();
         zone.radius = zoneRadius;
         insideWalls.gameObject.SetActive(false);
         outsideWalls.gameObject.SetActive(false);
         insideWalls.localScale = new Vector3(695, 500,695);
         outsideWalls.localScale = new Vector3(695, 500,695);
+
+        //search all the players to find the zone center
 
         GameObject[] users = GameObject.FindGameObjectsWithTag("User");
 
@@ -45,11 +48,13 @@ public class Zone : MonoBehaviour
 
         centerZone /= i;
 
+        //permite to find where itll stop to shrink
         dividedZone = zoneRadius / 2;
     }
 
     private void Update()
     {
+        //define where the zone will be set up
         centerZone.y = 0;
         insideWalls.position = centerZone;
         outsideWalls.position = centerZone;
@@ -59,6 +64,8 @@ public class Zone : MonoBehaviour
         if (stormActive == false)
         {
             
+            //start the first zone
+
             timerFirstZone -= Time.deltaTime;
 
             if (timerFirstZone <= 0 && firstZoneEnabled == false)
@@ -70,12 +77,13 @@ public class Zone : MonoBehaviour
                 if (playSound)
                 {
                     zoneSource.PlayOneShot(zoneClip);
-                    timerFirstZone = 10;
+                    timerFirstZone = 60;
                     firstZoneEnabled = true;
                     playSound = false;
                 }
             }
 
+            //once the first zone is enabled, we can start the second one
             if (firstZoneEnabled)
             {
                 timerNextZone -= Time.deltaTime;
@@ -88,10 +96,12 @@ public class Zone : MonoBehaviour
         }
         else if (stormActive == true)
         {
+            //reduce the zone
             zone.radius -= deltaRadius;
             insideWalls.localScale = insideWalls.localScale - new Vector3(0.03f, 0, 0.03f);
             outsideWalls.localScale = outsideWalls.localScale - new Vector3(0.03f, 0, 0.03f);
 
+            //set a limit
             if (zone.radius <= dividedZone)
             {
                 stormLimit = true;
@@ -99,13 +109,15 @@ public class Zone : MonoBehaviour
             }
         }
 
+        //redefine the next zone half radius
         if(stormLimit == true)
         {
-            timerNextZone = 10f;
+            timerNextZone = 120f;
             dividedZone = zone.radius / 2;
             stormLimit = false;
         }
 
+        //define the last zone radius
         if(zone.radius <= 15)
         {
             zone.radius = 15;

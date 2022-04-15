@@ -37,12 +37,13 @@ public class AmmowScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ammow") && Currentammow != 200)
+        if (other.CompareTag("Ammow") && Currentammow <= 200)
         {
-            ammoSource.PlayOneShot(ammoClip);
+            Debug.Log("Ammow");
+            //ammoSource.PlayOneShot(ammoClip);
             Currentammow += 200;
             text.text = Currentammow + " / " + Maxammow;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 }

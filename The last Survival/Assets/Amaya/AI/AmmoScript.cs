@@ -19,7 +19,7 @@ public class AmmoScript : MonoBehaviour
         if (other.CompareTag("Ammow") && nbAmmo <= 200)
         {
             nbAmmo = 200;
-            other.enabled = false;
+            other.gameObject.SetActive(false);
         }
     }
 }

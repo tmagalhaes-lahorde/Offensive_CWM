@@ -21,7 +21,6 @@ public class EnnemiesAlive : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(win);
         EnnemiesAliveCount = GameObject.FindGameObjectsWithTag("User");
         text.text = EnnemiesAliveCount.Length.ToString();
 

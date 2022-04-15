@@ -50,8 +50,9 @@ public class AttackTarget : Nodes
 
                 //Vector3 randDir = Random.insideUnitSphere * 2;
                 Vector3 dir = userPos - originPos;
-                //Vector3 lastDir = (dir + randDir) /2;
+            //Vector3 lastDir = (dir + randDir) /2;
 
+            Debug.Log(target.name);
                 if (Physics.Raycast(originPos, dir , out RaycastHit hit,100))
                 {
                     CibleScript cible = hit.collider.GetComponent<CibleScript>();
