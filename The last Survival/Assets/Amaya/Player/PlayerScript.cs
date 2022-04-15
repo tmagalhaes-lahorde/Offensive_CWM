@@ -146,7 +146,22 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "NextZone")
+        {
+            arrowPointer.gameObject.SetActive(false);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "NextZone")
+        {
+            arrowPointer.gameObject.SetActive(true);
+        }
+    }
+
 
 }
 

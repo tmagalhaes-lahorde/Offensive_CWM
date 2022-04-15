@@ -8,28 +8,29 @@ public class FOVAmmo : Nodes
     private Animator _animator;
 
     GameObject[] ammobox;
+    private bool isInit = false;
     public FOVAmmo(Transform transform, Animator animator)
     {
         _transform = transform;
         _animator = animator;
-        ammobox = GameObject.FindGameObjectsWithTag("Ammow");
 
     }
     public override NodesState Evaluate()
     {
-        List<GameObject> ammo = new List<GameObject>();
-
         if (_transform.gameObject.GetComponent<AmmoScript>().nbAmmo > 50)
         {
             return NodesState.FAILURE;
         }
 
-        for (int i = 0; i < ammobox.Length; i++)
+        if (!isInit)
         {
-            ammo.Add(ammobox[i].gameObject);
+            ammobox = GameObject.FindGameObjectsWithTag("Ammow");
+            isInit = true;
         }
 
-        foreach (GameObject ammow in ammo)
+        ClearData("Ammow");
+
+        foreach (GameObject ammow in ammobox)
         {
             if (ammow.activeSelf == true)
             {
@@ -42,6 +43,7 @@ public class FOVAmmo : Nodes
 
                         if (angle < 60)
                         {
+                            SetData("Ammow", ammow.transform);
                             _transform.LookAt(ammow.transform.position);
                             return NodesState.SUCCESS;
                         }

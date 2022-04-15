@@ -6,12 +6,12 @@ using BehaviourTree;
 
 public class GoToZone : Nodes
 {
-    private Zone _zone;
+    private nextZone _zone;
     private Transform _transform;
     private Animator _animator;
     private NavMeshAgent _waypointFollow;
     private NavMeshAgent _agent;
-    public GoToZone(Transform transform, Animator animator,NavMeshAgent agent, NavMeshAgent wpFollow,Zone zone)
+    public GoToZone(Transform transform, Animator animator,NavMeshAgent agent, NavMeshAgent wpFollow,nextZone zone)
     {
         _transform = transform;
         _animator = animator;
@@ -24,9 +24,9 @@ public class GoToZone : Nodes
     {
         _transform.GetComponent<CibleScript>();
 
-        if (_transform.gameObject.GetComponent<CibleScript>().outZone)
+        if (_transform.gameObject.GetComponent<CibleScript>().outNextZone)
         {
-            _waypointFollow.SetDestination(_zone.centerZone);
+            _waypointFollow.SetDestination(_zone.originZone.centerZone);
             _agent.SetDestination(_waypointFollow.transform.position);
             return NodesState.SUCCESS;
 

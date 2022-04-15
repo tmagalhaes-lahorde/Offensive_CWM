@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CibleScript : MonoBehaviour
 {
-    public int nbHealth = 10;
+    public int nbHealth = 100;
     private float timerinzone = 1;
-    public bool outZone = false;
+    public bool outZone = false, outNextZone = true;
 
     void Update()
     {
@@ -40,16 +40,25 @@ public class CibleScript : MonoBehaviour
         if (other.CompareTag("HealthKit") && nbHealth <= 100)
         {
             nbHealth = 100;
-            GameObject.Destroy(other.gameObject);
+            other.enabled = false;
         }
 
-        if (other.gameObject.tag == "Zone")
+        if (other.gameObject.tag == "NextZone")
+        {
+            outNextZone = false;
+        }
+        if (other.gameObject.tag =="Zone")
         {
             outZone = false;
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.tag == "NextZone")
+        {
+            outNextZone = true;
+        }
+
         if (other.gameObject.tag == "Zone")
         {
             outZone = true;

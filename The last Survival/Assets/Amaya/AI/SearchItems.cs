@@ -15,23 +15,29 @@ public class SearchItems : Nodes
         _transform = transform;
         _animator = animator;
         _agent = agent;
-        medikits = GameObject.FindGameObjectsWithTag("HealthKit");
-        ammobox = GameObject.FindGameObjectsWithTag("Ammow");
     }
 
     public override NodesState Evaluate()
     {
-        foreach(GameObject kit in medikits)
+        object k = GetData("HealthKit");
+        object a = GetData("Ammow");
+
+        Transform kit = (Transform)k;
+        Transform ammo = (Transform)a;
+
+        if (kit != null)
         {
             _agent.SetDestination(kit.transform.position);
             return NodesState.SUCCESS;
         }
 
-        foreach (GameObject ammo in ammobox)
+        if (ammo != null)
         {
             _agent.SetDestination(ammo.transform.position);
             return NodesState.SUCCESS;
         }
+
         return NodesState.FAILURE;
     }
+    
 }

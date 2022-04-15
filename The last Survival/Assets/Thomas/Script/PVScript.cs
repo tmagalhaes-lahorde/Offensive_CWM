@@ -7,7 +7,7 @@ using TMPro;
 public class PVScript : MonoBehaviour
 {
 
-    public float CurrentHealth = 50.0f;
+    public float CurrentHealth = 100.0f;
     public float Maxhealth = 100.0f;
     private float timerInZone = 1;
 
@@ -20,14 +20,13 @@ public class PVScript : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI text;
     public Image color;
-    //public RawImage inStormEffect;
+    public RawImage inStormEffect;
 
     public int medikit = 0;
     
 
     private void Start()
     {
-        //inStormEffect.enabled = false;
     }
 
     // Update is called once per frame
@@ -42,44 +41,41 @@ public class PVScript : MonoBehaviour
         HealthBarImage.fillAmount = CurrentHealth / Maxhealth;
         healthText.text = CurrentHealth + " / " + Maxhealth;
 
-        if (CurrentHealth >= 70)
-        {
-            color.color = Color.green;
-        }
+        //if (CurrentHealth >= 70)
+        //{
+        //    color.color = Color.green;
+        //}
+        //
+        //if (CurrentHealth <= 70)
+        //{
+        //    color.color = Color.yellow;
+        //}
+        //
+        //if (CurrentHealth <= 30)
+        //{
+        //    color.color = Color.red;
+        //}
+        //
+        //if (CurrentHealth >= 100)
+        //{
+        //    CurrentHealth = 100;
+        //}
+        //
+        //if (Input.GetKeyDown(KeyCode.K) || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
+        //{
+        //    CurrentHealth = 100;
+        //    medikit = 0;
+        //    //text.text = "0";
+        //}
 
-        if (CurrentHealth <= 70)
+        if(outZone == true)
         {
-            color.color = Color.yellow;
-        }
-
-        if (CurrentHealth <= 30)
-        {
-            color.color = Color.red;
-        }
-
-        if (CurrentHealth >= 100)
-        {
-            CurrentHealth = 100;
-        }
-
-        if (Input.GetKeyDown(KeyCode.K) && medikit >= 1 && CurrentHealth != 100 || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
-        {
-            CurrentHealth = 100;
-            medikit = 0;
-            text.text = "0";
-        }
-
-        else if(outZone == true)
-        {
-            //inStormEffect.enabled = true;
+            inStormEffect.enabled = true;
         
             timerInZone -= Time.deltaTime;
 
             if(timerInZone <= 0)
             {
-        
-                Debug.Log("cc");
-        
                 CurrentHealth -= 1;
         
                 timerInZone = 1;
@@ -90,16 +86,17 @@ public class PVScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("soin") && medikit <= 0) 
+        if (other.CompareTag("HealthKit") && medikit <= 0) 
         {
             text.text = "1";
             healthSource.PlayOneShot(healthClip);
             medikit = 1;
-            GameObject.Destroy(other.gameObject);
+            other.enabled = false;
         }
 
         if (other.gameObject.tag == "Zone")
         {
+            inStormEffect.enabled = false;
             outZone = false;
         }
     }
@@ -108,6 +105,7 @@ public class PVScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Zone")
         {
+            inStormEffect.enabled = true;
             outZone = true;
         }
     }
@@ -115,7 +113,6 @@ public class PVScript : MonoBehaviour
     public void DamageButton(int damage)
     {
         CurrentHealth -= damage;
-        Debug.Log("cc");
     }
     public void HealthButton(int Health)
     {

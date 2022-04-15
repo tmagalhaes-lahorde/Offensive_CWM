@@ -40,7 +40,12 @@ namespace BehaviourTree
         private Dictionary<string, object> _dataContext = new Dictionary<string, object>();
         public void SetData(string key, object value)
         {
-            _dataContext[key] = value;
+            Nodes root = this;
+
+            while (root.Parents != null)
+                root = root.Parents;
+
+            root._dataContext[key] = value;
         }
 
 

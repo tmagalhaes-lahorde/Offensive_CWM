@@ -7,10 +7,11 @@ using BehaviourTree;
 public class EnemiesBT : TreeBuild
 {
     public Transform User;
+    public Transform Player;
     public Animator Animator;
     public NavMeshAgent Agent;
     public NavMeshAgent WpFollow;
-    public Zone Zone;
+    public nextZone Zone;
     public static float fovRange = 20f;
     public static int NbAmmo = 50;
     public AudioSource ShootEnnemie;
