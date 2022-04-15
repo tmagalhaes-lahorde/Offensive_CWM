@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class EndComponent : MonoBehaviour
 {
     public GameObject Joueur_Restants;
     public GameObject Player;
     public GameObject GameTime;
+
+    public EventSystem M_EventSystem;
 
     public Image WinBG;
 
@@ -18,7 +21,7 @@ public class EndComponent : MonoBehaviour
     public Text Score;
     public Text Rank;
 
-    public Button MenuBTN;
+    public GameObject MenuBTN;
 
     public bool Winning, Lost;
     private void Start()
@@ -44,6 +47,7 @@ public class EndComponent : MonoBehaviour
         if (Joueur_Restants.GetComponent<EnnemiesAlive>().win)
         {
             ActiveEnd();
+            M_EventSystem.SetSelectedGameObject(MenuBTN);
             Win.gameObject.SetActive(true);
             Time.timeScale = 0f;
 
@@ -53,6 +57,7 @@ public class EndComponent : MonoBehaviour
         if(Player.GetComponent<PVScript>().lose)
         {
             ActiveEnd();
+            M_EventSystem.SetSelectedGameObject(MenuBTN);
             Lose.gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
@@ -65,6 +70,7 @@ public class EndComponent : MonoBehaviour
         Score.gameObject.SetActive(true);
         Rank.gameObject.SetActive(true);
 
-        MenuBTN.gameObject.SetActive(true);
+        MenuBTN.SetActive(true);
+
     }
 }
