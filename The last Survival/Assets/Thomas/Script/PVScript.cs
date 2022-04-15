@@ -86,7 +86,7 @@ public class PVScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("HealthKit") && medikit <= 0) 
+        if (other.CompareTag("soin") && medikit <= 0) 
         {
             Debug.Log("HEAL");
             text.text = "1";

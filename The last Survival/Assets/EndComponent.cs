@@ -40,8 +40,8 @@ public class EndComponent : MonoBehaviour
     {
 
         //Kills.text = Player.GetComponent<PlayerScript>().nbkills.ToString();
-        Rank.text = Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
-        Score.text = GameTime.GetComponent<TimerScript>().time.ToString();
+        Rank.text = "Rank is " + Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
+        Score.text = "Time in Game is : " + GameTime.GetComponent<TimerScript>().time.ToString();
 
         if (Joueur_Restants.GetComponent<EnnemiesAlive>().win)
         {
