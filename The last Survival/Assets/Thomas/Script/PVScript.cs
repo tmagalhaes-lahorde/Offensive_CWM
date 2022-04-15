@@ -61,7 +61,7 @@ public class PVScript : MonoBehaviour
             CurrentHealth = 100;
         }
         
-        if (Input.GetKeyDown(KeyCode.K) || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
+        if (Input.GetKeyDown(KeyCode.K) && medikit >= 1 && CurrentHealth != 100 || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
         {
             CurrentHealth = 100;
             medikit = 0;
@@ -86,7 +86,7 @@ public class PVScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("soin") && medikit <= 0) 
+        if (other.CompareTag("HealthKit") && medikit <= 0) 
         {
             Debug.Log("HEAL");
             text.text = "1";

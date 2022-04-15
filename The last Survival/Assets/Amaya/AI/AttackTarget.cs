@@ -48,12 +48,11 @@ public class AttackTarget : Nodes
                 Vector3 originPos = new Vector3(_transform.position.x, _transform.position.y + 1, _transform.position.z);
                 Vector3 userPos = new Vector3(user.transform.position.x, user.transform.position.y + 1, user.transform.position.z);
 
-                //Vector3 randDir = Random.insideUnitSphere * 2;
+                Vector3 randDir = Random.insideUnitSphere * 2;
                 Vector3 dir = userPos - originPos;
-            //Vector3 lastDir = (dir + randDir) /2;
+                Vector3 lastDir = (dir + randDir) /2;
 
-            Debug.Log(target.name);
-                if (Physics.Raycast(originPos, dir , out RaycastHit hit,100))
+                if (Physics.Raycast(originPos, lastDir , out RaycastHit hit,100))
                 {
                     CibleScript cible = hit.collider.GetComponent<CibleScript>();
                     PVScript playerHealth = hit.collider.GetComponent<PVScript>();
@@ -81,13 +80,13 @@ public class AttackTarget : Nodes
                     {
                         if (hit.collider.GetComponent<CibleScript>())
                         {
-                            user.GetComponent<CibleScript>().nbHealth -= 5;
+                            user.GetComponent<CibleScript>().nbHealth -= 10;
                             if (user.GetComponent<CibleScript>().nbHealth <= 0)
                                 ClearData("target");
                         }
                         else if(user.GetComponent<PVScript>())
                         {
-                            user.GetComponent<PVScript>().CurrentHealth -= 5;
+                            user.GetComponent<PVScript>().CurrentHealth -= 10;
                             if (user.GetComponent<PVScript>().CurrentHealth <= 0)
                                 ClearData("target");
                         }

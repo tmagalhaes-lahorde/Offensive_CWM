@@ -18,9 +18,9 @@ public class SpawnerMedikit : MonoBehaviour
     {
         while ( Medikitcount < 200)
         {
-            Xpos = Random.Range(-501, 474);
-            Zpos = Random.Range(-502, 474);
-            Instantiate(medikit, new Vector3(Xpos, 100, Zpos), Quaternion.identity);
+            Xpos = Random.Range(-501, 470);
+            Zpos = Random.Range(-501, 470);
+            Instantiate(medikit, new Vector3(Xpos, 50, Zpos), Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
             Medikitcount += 1;
         }

@@ -17,7 +17,6 @@ public class EndComponent : MonoBehaviour
 
     public Text Score;
     public Text Rank;
-    public Text Kills;
 
     public Button MenuBTN;
 
@@ -31,7 +30,6 @@ public class EndComponent : MonoBehaviour
         Title.gameObject.SetActive(false);
         Score.gameObject.SetActive(false);
         Rank.gameObject.SetActive(false);
-        Kills.gameObject.SetActive(false);
 
         Lost = false;
     }
@@ -40,8 +38,8 @@ public class EndComponent : MonoBehaviour
     {
 
         //Kills.text = Player.GetComponent<PlayerScript>().nbkills.ToString();
-        Rank.text = "Rank is " + Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
-        Score.text = "Time in Game is : " + GameTime.GetComponent<TimerScript>().time.ToString();
+        Rank.text = "You ranked : " + Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
+        Score.text = "Your game lasted : " + GameTime.GetComponent<TimerScript>().time.ToString() + "s";
 
         if (Joueur_Restants.GetComponent<EnnemiesAlive>().win)
         {
@@ -66,7 +64,6 @@ public class EndComponent : MonoBehaviour
         WinBG.gameObject.SetActive(true);
         Score.gameObject.SetActive(true);
         Rank.gameObject.SetActive(true);
-        Kills.gameObject.SetActive(true);
 
         MenuBTN.gameObject.SetActive(true);
     }

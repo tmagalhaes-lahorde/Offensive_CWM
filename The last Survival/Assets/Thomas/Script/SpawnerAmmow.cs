@@ -18,9 +18,9 @@ public class SpawnerAmmow : MonoBehaviour
     {
         while (ammow < 200)
         {
-            Xpos = Random.Range(-502, 475);
-            Zpos = Random.Range(-502, 475);
-            Instantiate(Ammow, new Vector3(Xpos, 100, Zpos), Quaternion.identity);
+            Xpos = Random.Range(-501, 470);
+            Zpos = Random.Range(-501, 470);
+            Instantiate(Ammow, new Vector3(Xpos, 50, Zpos), Quaternion.identity);
             yield return new WaitForSeconds(2);
             ammow += 1;
         }

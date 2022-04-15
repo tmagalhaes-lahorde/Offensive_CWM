@@ -17,10 +17,10 @@ public class SpawnerEnnemies : MonoBehaviour
 
     IEnumerator EnnemyDrop()
     {
-        while(EnnemiesCount < 97)
+        while(EnnemiesCount < 98)
         {
-            Xpos = Random.Range(-501, 499);
-            Zpos = Random.Range(-501, 473);
+            Xpos = Random.Range(-501, 470);
+            Zpos = Random.Range(-501, 470);
 
             NavMeshHit hit;
             while (!NavMesh.SamplePosition(new Vector3(Xpos, 50, Zpos), out hit, 100.0f, NavMesh.AllAreas));
