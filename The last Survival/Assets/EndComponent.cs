@@ -8,6 +8,7 @@ public class EndComponent : MonoBehaviour
     public GameObject Joueur_Restants;
     public GameObject Player;
     public GameObject GameTime;
+    public GameObject cibleScript;
 
     public Image WinBG;
 
@@ -21,7 +22,7 @@ public class EndComponent : MonoBehaviour
 
     public Button MenuBTN;
 
-    public bool Winning, Lost;
+    //public bool Winning, Lost;
     private void Start()
     {
         MenuBTN.gameObject.SetActive(false);
@@ -33,21 +34,21 @@ public class EndComponent : MonoBehaviour
         Rank.gameObject.SetActive(false);
         Kills.gameObject.SetActive(false);
 
-        Lost = false;
+        //Lost = false;
     }
 
     private void Update()
     {
 
-        Kills.text = Player.GetComponent<PlayerScript>().nbkills.ToString();
-        Rank.text = Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
-        Score.text = GameTime.GetComponent<TimerScript>().time.ToString();
+        //Kills.text =  " NB KILLS IS " + Player.GetComponent<PlayerScript>().nbkills.ToString();
+        //Rank.text = Joueur_Restants.GetComponent<EnnemiesAlive>().EnnemiesAliveCount.Length.ToString();
+        Score.text = " TIME IS : " + GameTime.GetComponent<TimerScript>().time.ToString();
 
         if (Joueur_Restants.GetComponent<EnnemiesAlive>().win)
         {
             ActiveEnd();
             Win.gameObject.SetActive(true);
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
 
             //Time.timeScale = 0f;
         }
@@ -56,7 +57,7 @@ public class EndComponent : MonoBehaviour
         {
             ActiveEnd();
             Lose.gameObject.SetActive(true);
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
         }
     }
 

@@ -22,7 +22,7 @@ public class AmmowScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //text.text = Currentammow + " / " + Maxammow;
+        text.text = Currentammow + " / " + Maxammow;
 
         if (Currentammow >= 200)
         {

@@ -16,10 +16,10 @@ public class PVScript : MonoBehaviour
 
     public bool outZone = false;
     public bool lose = false;
-    //public Image HealthBarImage;
-    //public TextMeshProUGUI healthText;
-    //public TextMeshProUGUI text;
-    //public Image color;
+    public Image HealthBarImage;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI text;
+    public Image color;
     //public RawImage inStormEffect;
 
     public int medikit = 0;
@@ -39,34 +39,34 @@ public class PVScript : MonoBehaviour
             lose = true;
         }
 
-        //HealthBarImage.fillAmount = CurrentHealth / Maxhealth;
-        //healthText.text = CurrentHealth + " / " + Maxhealth;
+        HealthBarImage.fillAmount = CurrentHealth / Maxhealth;
+        healthText.text = CurrentHealth + " / " + Maxhealth;
 
-        //if (CurrentHealth >= 70)
-        //{
-        //    color.color = Color.green;
-        //}
+        if (CurrentHealth >= 70)
+        {
+            color.color = Color.green;
+        }
 
-        //if (CurrentHealth <= 70)
-        //{
-        //    color.color = Color.yellow;
-        //}
+        if (CurrentHealth <= 70)
+        {
+            color.color = Color.yellow;
+        }
 
-        //if (CurrentHealth <= 30)
-        //{
-        //    color.color = Color.red;
-        //}
+        if (CurrentHealth <= 30)
+        {
+            color.color = Color.red;
+        }
 
-        //if (CurrentHealth >= 100)
-        //{
-        //    CurrentHealth = 100;
-        //}
+        if (CurrentHealth >= 100)
+        {
+            CurrentHealth = 100;
+        }
 
-        if (Input.GetKeyDown(KeyCode.K) || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
+        if (Input.GetKeyDown(KeyCode.K) && medikit >= 1 && CurrentHealth != 100 || Input.GetButton("UseHeal") && medikit >= 1 && CurrentHealth != 100) 
         {
             CurrentHealth = 100;
             medikit = 0;
-            //text.text = "0";
+            text.text = "0";
         }
 
         else if(outZone == true)
@@ -90,9 +90,9 @@ public class PVScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("HealthKit") && medikit <= 0) 
+        if (other.CompareTag("soin") && medikit <= 0) 
         {
-            //text.text = "1";
+            text.text = "1";
             healthSource.PlayOneShot(healthClip);
             medikit = 1;
             GameObject.Destroy(other.gameObject);
